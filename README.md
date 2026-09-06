@@ -1,28 +1,24 @@
-# agent-delivery-pipeline
+# claude-code-plugins
 
-A Claude Code plugin providing a full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work.
+BOON's catalog of Claude Code plugins, distributed as a single marketplace.
 
-## Contents
-
-- **`skills/agent-delivery-pipeline/`** — the orchestration skill: sizing rules, stage sequencing, worktree isolation, API-contract handling, and delivery rules.
-- **`agents/`** — nine sub-agents, each owning one stage:
-  - `solution-architect` — functional + technical design (`.claude/design-plan.md`)
-  - `implementation-planner` — execution plan (`.claude/temp/plan.md`)
-  - `plan-driven-implementer` — faithful plan execution (product code only)
-  - `unit-test-implementer` — unit tests (opt-in)
-  - `technical-tester` — test plan + execution (opt-in)
-  - `code-reviewer` — correctness/security/edge-case review (opt-in)
-  - `document-reader` — distills source documents into `.claude/docs/` summaries
-  - `api-specs-writer` — documents this project's own HTTP API (opt-in)
-  - `api-bruno-writer` — generates a Bruno collection from the API doc (opt-in)
-
-## Install
-
-Add this repo as a marketplace and install the plugin:
+## Add this marketplace
 
 ```
-/plugin marketplace add <path-or-url-to-this-repo>
-/plugin install agent-delivery-pipeline
+/plugin marketplace add https://github.com/ChanatSinp/claude-plugin-agent-delivery-pipeline.git
 ```
 
-Or reference it directly as a local plugin directory in your Claude Code settings.
+(Update the URL above if the repo is renamed.)
+
+## Plugins in this catalog
+
+- **[agent-delivery-pipeline](plugins/agent-delivery-pipeline/README.md)** — a full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work.
+  ```
+  /plugin install agent-delivery-pipeline@claude-code-plugins
+  ```
+
+## Adding a new plugin to this catalog
+
+1. Create `plugins/<plugin-name>/` with its own `.claude-plugin/plugin.json`, `agents/`, `skills/`, `commands/` as needed, and a `README.md`.
+2. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array, with `"source": {"source": "directory", "path": "./plugins/<plugin-name>"}`.
+3. List it above.
