@@ -43,7 +43,7 @@ Each plugin is self-contained: it carries one manifest per harness (`.claude-plu
    - `skills/<skill-name>/SKILL.md` — one harness-agnostic file per skill: no assumption of sub-agent dispatch, no harness-specific paths beyond naming `.claude/` as an example convention directory. If the plugin has sub-agents, phrase stage ownership as "dispatch the named agent where available, otherwise run the stage yourself."
    - `agents/` — Claude-only sub-agent definitions, if the plugin has any. `skills/` references them by name as the Claude Code binding for a stage; they're inert (auto-discovered but never dispatched) on runtimes without sub-agent support.
    - `README.md`.
-2. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array, with `"source": {"source": "directory", "path": "./plugins/<plugin-name>"}`. Mirror the same entry into `.cursor-plugin/marketplace.json` at the repo root.
+2. Add an entry for it to `.claude-plugin/marketplace.json`'s `plugins` array, with `"source": "./plugins/<plugin-name>"`. Mirror the same entry into `.cursor-plugin/marketplace.json` at the repo root.
 3. List it above.
 
 ## Cursor
