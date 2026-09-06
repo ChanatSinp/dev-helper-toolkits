@@ -224,7 +224,7 @@ When a term could refer to multiple artifact types (e.g. "canon file" = spec fil
 
 - **Heavy (Opus/Fable-class, inline):** derive stories, audit logic, dependency reasoning.
 - **Light (Sonnet subagent OK):** batch renumber, change-log formatting.
-- Multi-epic dependency audit → one subagent per epic, each returns an impact table; merge in the main session.
+- Multi-epic dependency audit → one subagent per epic, each returns an impact table; merge in the main session. If your runtime has no sub-agent dispatch, work through the epics one at a time inline instead.
 - Recommend tier once at the start of a large run; the user switches.
 
 ---

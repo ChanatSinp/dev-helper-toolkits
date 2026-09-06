@@ -164,7 +164,7 @@ numbers and competitive features.
 
 Before the first tool call of a research or synthesis run, state one line: [task class] · [current model] · [match/mismatch → action].
 
-Synthesis, positioning, and the executive summary are heavy — run them inline on a high-tier model (Opus/Fable-class). When analyzing 3+ competitors with web access, fan out one Sonnet subagent per competitor for fact collection (overview, pricing, sentiment, sources); each returns a structured brief. Merge and write the positioning in the main session — never delegate the "so what" layer.
+Synthesis, positioning, and the executive summary are heavy — run them inline on a high-tier model (Opus/Fable-class). When analyzing 3+ competitors with web access, fan out one Sonnet subagent per competitor for fact collection (overview, pricing, sentiment, sources); each returns a structured brief. If your runtime has no sub-agent dispatch, research competitors one at a time inline instead, in the same session. Merge and write the positioning in the main session — never delegate the "so what" layer.
 
 ## Tone
 

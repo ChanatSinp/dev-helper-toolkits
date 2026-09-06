@@ -219,7 +219,7 @@ When run under an orchestrator that can switch models, split by cognitive load:
 
 State the suggestion once at the start of a large run; the user switches.
 
-**Subagent fan-out (multi-epic batch):** after scope is confirmed in the main session, fan out one Sonnet subagent per epic (bounded — never per story); each returns its case list + traceability matrix for merge in the main session. Single epic → generate inline. On an Opus/Fable-class orchestrator, the heavy phases run inline — do not spawn an Opus subagent for them.
+**Subagent fan-out (multi-epic batch):** after scope is confirmed in the main session, fan out one Sonnet subagent per epic (bounded — never per story); each returns its case list + traceability matrix for merge in the main session. Single epic → generate inline. On an Opus/Fable-class orchestrator, the heavy phases run inline — do not spawn an Opus subagent for them. If your runtime has no sub-agent dispatch, work through epics one at a time inline instead of fanning out.
 
 ---
 

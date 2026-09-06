@@ -1,0 +1,20 @@
+{
+  "name": "designer-toolkit",
+  "displayName": "Designer Toolkit",
+  "description": "Designer toolkit: prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode.",
+  "version": "0.3.0",
+  "author": {
+    "name": "AU.SP"
+  },
+  "homepage": "https://github.com/ChanatSinp/claude-code-plugins",
+  "repository": "https://github.com/ChanatSinp/claude-code-plugins",
+  "category": "design",
+  "keywords": [
+    "design",
+    "prototype",
+    "design-qa",
+    "design-handoff",
+    "interview"
+  ],
+  "skills": "./skills/"
+}

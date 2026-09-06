@@ -151,7 +151,7 @@ When context runs heavy (rising error rate, slow composes) or the build will con
 ## Remaining work
 <ordered, most-blocked first>
 ## Open questions
-<OQ needing user decision — bundle into one AskUserQuestion next session>
+<OQ needing user decision — bundle into one question next session>
 ## Gotchas
 <anything that bit us: quirks, guards, do-not-touch zones>
 ```

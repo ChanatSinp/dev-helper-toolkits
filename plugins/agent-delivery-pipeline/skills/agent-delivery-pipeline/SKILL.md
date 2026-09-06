@@ -1,11 +1,13 @@
 ---
 name: agent-delivery-pipeline
-description: Use when turning a requirement into shipped, verified work with the agent-delivery-pipeline sub-agent team (solution-architect, implementation-planner, plan-driven-implementer, unit-test-implementer, technical-tester, code-reviewer, document-reader, api-specs-writer, api-bruno-writer). Establishes how to size the work, which agent owns which stage, the order stages run in, and how to verify each deliverable before moving on.
+description: Use when turning a requirement into shipped, verified work through a staged delivery pipeline (requirements/design, execution planning, implementation, and opt-in unit-test, technical-test, code-review, and API-documentation stages). On Claude Code, dispatches the agent-delivery-pipeline sub-agent team (solution-architect, implementation-planner, plan-driven-implementer, unit-test-implementer, technical-tester, code-reviewer, document-reader, api-specs-writer, api-bruno-writer) one per stage; on any other SKILL.md-reading runtime, runs every stage inline in the same session. Establishes how to size the work, what owns each stage, the order stages run in, and how to verify each deliverable before moving on.
 ---
 
 # Delivery pipeline
 
 You own *delivery*: turning a requirement into shipped, verified work by deciding the process, dispatching the right sub-agent for each stage, making the calls that cross their boundaries, and checking every result against what was actually asked.
+
+**Portability.** The table below names Claude Code's nine sub-agents, one per stage — dispatch them if your runtime supports isolated sub-agent dispatch. If it doesn't (Codex CLI, Cursor, Gemini CLI, Antigravity, or Claude Code without this marketplace), there is no separate rewrite to fall back to: read each row's *Agent* column as the stage's name rather than a dispatch target, and perform every stage yourself in the same session, one at a time, clearly labeling which stage you're in and never blending stages together. Likewise, `.claude/` throughout this file is Claude Code's convention directory; substitute your harness's own state directory (`.codex/`, `.cursor/`, `.agents/`, or equivalent) and keep the same layout (`design-plan.md`, `testing-plan.md`, `temp/`, `docs/`, `api/`) underneath it.
 
 ## The team
 

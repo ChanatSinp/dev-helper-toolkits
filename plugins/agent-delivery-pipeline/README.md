@@ -5,10 +5,9 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 ## Contents
 
 - **`.claude-plugin/plugin.json`** — Claude Code manifest.
-- **`.codex-plugin/plugin.json`**, **`.cursor-plugin/plugin.json`** — manifests for Codex CLI and Cursor, each pointing at `skills-portable/`.
-- **`skills/agent-delivery-pipeline/`** — the Claude Code orchestration skill: sizing rules, stage sequencing, worktree isolation, API-contract handling, and delivery rules, assuming isolated sub-agent dispatch.
-- **`skills-portable/agent-delivery-pipeline/`** — the harness-agnostic rewrite of the same skill for Codex, Cursor, and manual copy into any other `SKILL.md`-reading runtime: same stages and rules, run sequentially by the one active agent with no sub-agent isolation assumed.
-- **`agents/`** — nine sub-agents (Claude Code only, dispatched by `skills/agent-delivery-pipeline/`), each owning one stage:
+- **`.codex-plugin/plugin.json`**, **`.cursor-plugin/plugin.json`** — manifests for Codex CLI and Cursor, each pointing at the same `skills/` directory as Claude Code.
+- **`skills/agent-delivery-pipeline/`** — one harness-agnostic orchestration skill: sizing rules, stage sequencing, worktree isolation, API-contract handling, and delivery rules. On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time.
+- **`agents/`** — nine sub-agents (Claude Code only, dispatched by `skills/agent-delivery-pipeline/` when sub-agent dispatch is available), each owning one stage:
   - `solution-architect` — functional + technical design (`.claude/design-plan.md`)
   - `implementation-planner` — execution plan (`.claude/temp/plan.md`)
   - `plan-driven-implementer` — faithful plan execution (product code only)
@@ -30,8 +29,8 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 
 Or reference `plugins/agent-delivery-pipeline/` directly as a local plugin directory in your Claude Code settings.
 
-**Cursor** — add this repo as a team marketplace (see the [root README](../../README.md#cursor)), then install `agent-delivery-pipeline` from the Plugins panel. Runs the portable skill, not the sub-agent pipeline.
+**Cursor** — add this repo as a team marketplace (see the [root README](../../README.md#cursor)), then install `agent-delivery-pipeline` from the Plugins panel. Runs every stage inline in the same session — no sub-agent dispatch.
 
-**Codex CLI** — `codex plugin marketplace add <this-repo>`, then `/plugins` to install. Runs the portable skill.
+**Codex CLI** — `codex plugin marketplace add <this-repo>`, then `/plugins` to install. Runs every stage inline, same as Cursor.
 
-**Any other `SKILL.md`-reading runtime** (Gemini CLI, Antigravity, or standalone Claude Code without the marketplace) — copy `skills-portable/agent-delivery-pipeline/` into that project's own skills convention directory (see the [root README](../../README.md#gemini-cli-antigravity-no-plugin-system)).
+**Any other `SKILL.md`-reading runtime** (Gemini CLI, Antigravity, or standalone Claude Code without the marketplace) — copy `skills/agent-delivery-pipeline/` into that project's own skills convention directory (see the [root README](../../README.md#gemini-cli-antigravity-no-plugin-system)).

@@ -1,0 +1,20 @@
+{
+  "name": "developer-toolkit",
+  "displayName": "Developer Toolkit",
+  "description": "Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode.",
+  "version": "0.3.0",
+  "author": {
+    "name": "AU.SP"
+  },
+  "homepage": "https://github.com/ChanatSinp/claude-code-plugins",
+  "repository": "https://github.com/ChanatSinp/claude-code-plugins",
+  "category": "developer-tools",
+  "keywords": [
+    "development-tools",
+    "prototype",
+    "design-qa",
+    "design-handoff",
+    "interview"
+  ],
+  "skills": "./skills/"
+}

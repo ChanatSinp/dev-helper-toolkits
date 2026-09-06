@@ -49,7 +49,7 @@ Filename: `handoff-spec-[screen]-[YYYY-MM-DD].md`.
 
 ## Mode: storybook
 
-Document components so dev can implement and verify them in isolation. Two output formats — ask which one via AskUserQuestion (bundle with any other open questions):
+Document components so dev can implement and verify them in isolation. Two output formats — ask the user which one (bundle with any other open questions):
 
 - **HTML gallery** (default when the project's prototypes are single-file HTML): one self-contained HTML file rendering every component × variant × state in a labeled grid, reusing the prototype's actual CSS/markup so the gallery IS the reference implementation.
 - **Storybook CSF files**: one `*.stories.js` per component (CSF3 format) when the dev team runs actual Storybook — only produce this when the user confirms the team uses Storybook.

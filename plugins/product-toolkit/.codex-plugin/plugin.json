@@ -1,0 +1,17 @@
+{
+  "name": "product-toolkit",
+  "version": "0.3.0",
+  "description": "Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode.",
+  "author": {
+    "name": "AU.SP"
+  },
+  "homepage": "https://github.com/ChanatSinp/claude-code-plugins",
+  "repository": "https://github.com/ChanatSinp/claude-code-plugins",
+  "keywords": [
+    "product",
+    "user-stories",
+    "market-research",
+    "interview"
+  ],
+  "skills": "./skills/"
+}

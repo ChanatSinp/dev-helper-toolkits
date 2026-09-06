@@ -16,5 +16,5 @@
     "testing",
     "api-documentation"
   ],
-  "skills": "./skills-portable/"
+  "skills": "./skills/"
 }
