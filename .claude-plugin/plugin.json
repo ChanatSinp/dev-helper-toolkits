@@ -1,0 +1,9 @@
+{
+  "name": "agent-delivery-pipeline",
+  "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation, unit testing, technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work.",
+  "version": "1.0.0",
+  "author": {
+    "name": "BOON",
+    "email": "chanat.sinp@gmail.com"
+  }
+}

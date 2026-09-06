@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "agent-delivery-pipeline",
+  "description": "Marketplace for the agent-delivery-pipeline plugin: a sub-agent team and orchestration skill for turning requirements into shipped, verified work.",
+  "owner": {
+    "name": "BOON",
+    "email": "chanat.sinp@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "agent-delivery-pipeline",
+      "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation, unit testing, technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work.",
+      "author": {
+        "name": "BOON",
+        "email": "chanat.sinp@gmail.com"
+      },
+      "category": "development-tools",
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  ]
+}
