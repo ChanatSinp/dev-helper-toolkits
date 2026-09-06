@@ -1,0 +1,8 @@
+{
+  "name": "developer-toolkit",
+  "version": "0.3.0",
+  "description": "Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode.",
+  "author": {
+    "name": "AU.SP"
+  }
+}
