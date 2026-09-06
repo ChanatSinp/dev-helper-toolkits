@@ -1,6 +1,6 @@
 # qa-toolkit
 
-QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode — packaged separately per harness.
+QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode — installable on Claude Code, Cursor, and Codex CLI from one shared skill set.
 
 ## Contents
 
@@ -11,11 +11,11 @@ QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping p
 
 ## Install
 
-**Claude Code** — distributed via the [claude-code-plugins](../../README.md) marketplace:
+**Claude Code** — distributed via the [dev-helper-toolkits](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
-/plugin install qa-toolkit@claude-code-plugins
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
+/plugin install qa-toolkit@dev-helper-toolkits
 ```
 
 Or reference `plugins/qa-toolkit/` directly as a local plugin directory in your Claude Code settings.

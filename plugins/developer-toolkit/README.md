@@ -1,6 +1,6 @@
 # developer-toolkit
 
-Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode — packaged separately per harness.
+Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode — installable on Claude Code, Cursor, and Codex CLI from one shared skill set.
 
 ## Contents
 
@@ -11,11 +11,11 @@ Developer toolkit: dev handoff specs/storybook, design QA reference, single-file
 
 ## Install
 
-**Claude Code** — distributed via the [claude-code-plugins](../../README.md) marketplace:
+**Claude Code** — distributed via the [dev-helper-toolkits](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
-/plugin install developer-toolkit@claude-code-plugins
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
+/plugin install developer-toolkit@dev-helper-toolkits
 ```
 
 Or reference `plugins/developer-toolkit/` directly as a local plugin directory in your Claude Code settings.

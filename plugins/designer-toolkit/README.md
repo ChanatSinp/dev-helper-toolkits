@@ -1,6 +1,6 @@
 # designer-toolkit
 
-Designer toolkit: prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode — packaged separately per harness.
+Designer toolkit: prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode — installable on Claude Code, Cursor, and Codex CLI from one shared skill set.
 
 ## Contents
 
@@ -11,11 +11,11 @@ Designer toolkit: prototype building, design QA, dev handoff specs, interview/sc
 
 ## Install
 
-**Claude Code** — distributed via the [claude-code-plugins](../../README.md) marketplace:
+**Claude Code** — distributed via the [dev-helper-toolkits](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
-/plugin install designer-toolkit@claude-code-plugins
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
+/plugin install designer-toolkit@dev-helper-toolkits
 ```
 
 Or reference `plugins/designer-toolkit/` directly as a local plugin directory in your Claude Code settings.

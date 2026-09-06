@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-code-plugins",
+  "name": "dev-helper-toolkits",
   "description": "BOON's catalog of Claude Code plugins.",
   "owner": {
     "name": "BOON",

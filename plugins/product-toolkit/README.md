@@ -1,6 +1,6 @@
 # product-toolkit
 
-Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode — packaged separately per harness.
+Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode — installable on Claude Code, Cursor, and Codex CLI from one shared skill set.
 
 ## Contents
 
@@ -11,11 +11,11 @@ Product toolkit: user story co-authoring, market/competitor research, interview/
 
 ## Install
 
-**Claude Code** — distributed via the [claude-code-plugins](../../README.md) marketplace:
+**Claude Code** — distributed via the [dev-helper-toolkits](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
-/plugin install product-toolkit@claude-code-plugins
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
+/plugin install product-toolkit@dev-helper-toolkits
 ```
 
 Or reference `plugins/product-toolkit/` directly as a local plugin directory in your Claude Code settings.

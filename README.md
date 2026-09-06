@@ -1,4 +1,4 @@
-# claude-code-plugins
+# dev-helper-toolkits
 
 BOON's catalog of agent plugins, distributed as a marketplace to Claude Code and Cursor, and installable directly by Codex CLI — plus a manual-copy path for runtimes (Gemini CLI, Antigravity) that only read the open `SKILL.md` format with no plugin system of their own.
 
@@ -7,7 +7,7 @@ Each plugin is self-contained: it carries one manifest per harness (`.claude-plu
 ## Claude Code
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
 ```
 
 (Update the URL above if the repo is renamed.)
@@ -16,23 +16,23 @@ Each plugin is self-contained: it carries one manifest per harness (`.claude-plu
 
 - **[agent-delivery-pipeline](plugins/agent-delivery-pipeline/README.md)** — a full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work.
   ```
-  /plugin install agent-delivery-pipeline@claude-code-plugins
+  /plugin install agent-delivery-pipeline@dev-helper-toolkits
   ```
 - **[designer-toolkit](plugins/designer-toolkit/README.md)** — prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode.
   ```
-  /plugin install designer-toolkit@claude-code-plugins
+  /plugin install designer-toolkit@dev-helper-toolkits
   ```
 - **[developer-toolkit](plugins/developer-toolkit/README.md)** — dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode.
   ```
-  /plugin install developer-toolkit@claude-code-plugins
+  /plugin install developer-toolkit@dev-helper-toolkits
   ```
 - **[product-toolkit](plugins/product-toolkit/README.md)** — user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode.
   ```
-  /plugin install product-toolkit@claude-code-plugins
+  /plugin install product-toolkit@dev-helper-toolkits
   ```
 - **[qa-toolkit](plugins/qa-toolkit/README.md)** — test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode.
   ```
-  /plugin install qa-toolkit@claude-code-plugins
+  /plugin install qa-toolkit@dev-helper-toolkits
   ```
 
 ### Adding a new plugin to this catalog

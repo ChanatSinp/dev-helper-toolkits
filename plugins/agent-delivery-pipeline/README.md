@@ -1,6 +1,6 @@
 # agent-delivery-pipeline
 
-A full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work — packaged separately per harness.
+A full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work — installable on Claude Code, Cursor, and Codex CLI from one shared skill.
 
 ## Contents
 
@@ -20,11 +20,11 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 
 ## Install
 
-**Claude Code** — distributed via the [claude-code-plugins](../../README.md) marketplace:
+**Claude Code** — distributed via the [dev-helper-toolkits](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
-/plugin install agent-delivery-pipeline@claude-code-plugins
+/plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
+/plugin install agent-delivery-pipeline@dev-helper-toolkits
 ```
 
 Or reference `plugins/agent-delivery-pipeline/` directly as a local plugin directory in your Claude Code settings.
