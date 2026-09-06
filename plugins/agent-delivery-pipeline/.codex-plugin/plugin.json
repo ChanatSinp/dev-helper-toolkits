@@ -1,0 +1,20 @@
+{
+  "name": "agent-delivery-pipeline",
+  "version": "1.0.0",
+  "description": "A staged delivery pipeline skill that turns a requirement into shipped, verified work: requirements/design, execution planning, implementation, and opt-in unit-test, technical-test, code-review, and API-documentation stages, run sequentially by the one active agent.",
+  "author": {
+    "name": "BOON",
+    "email": "chanat.sinp@gmail.com"
+  },
+  "homepage": "https://github.com/ChanatSinp/claude-code-plugins",
+  "repository": "https://github.com/ChanatSinp/claude-code-plugins",
+  "keywords": [
+    "delivery-pipeline",
+    "planning",
+    "implementation",
+    "code-review",
+    "testing",
+    "api-documentation"
+  ],
+  "skills": "./skills-portable/"
+}
