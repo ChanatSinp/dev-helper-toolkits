@@ -5,7 +5,7 @@ BOON's catalog of Claude Code plugins, distributed as a single marketplace.
 ## Add this marketplace
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-plugin-agent-delivery-pipeline.git
+/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
 ```
 
 (Update the URL above if the repo is renamed.)

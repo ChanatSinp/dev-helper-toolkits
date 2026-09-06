@@ -21,7 +21,7 @@ A Claude Code plugin providing a full delivery pipeline of specialized sub-agent
 This plugin is distributed via the [claude-code-plugins](../../README.md) marketplace:
 
 ```
-/plugin marketplace add https://github.com/ChanatSinp/claude-plugin-agent-delivery-pipeline.git
+/plugin marketplace add https://github.com/ChanatSinp/claude-code-plugins.git
 /plugin install agent-delivery-pipeline@claude-code-plugins
 ```
 
