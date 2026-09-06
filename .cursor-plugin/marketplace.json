@@ -9,8 +9,8 @@
   },
   "plugins": [
     {
-      "name": "agent-delivery-pipeline",
-      "source": "./plugins/agent-delivery-pipeline",
+      "name": "development-pipeline",
+      "source": "./plugins/development-pipeline",
       "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation, unit testing, technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work."
     },
     {
