@@ -1,0 +1,8 @@
+{
+  "name": "product-toolkit",
+  "description": "Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode.",
+  "version": "0.3.0",
+  "author": {
+    "name": "AU.SP"
+  }
+}

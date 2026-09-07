@@ -6,6 +6,7 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 
 - **`.claude-plugin/plugin.json`** — Claude Code manifest.
 - **`.codex-plugin/plugin.json`**, **`.cursor-plugin/plugin.json`** — manifests for Codex CLI and Cursor, each pointing at the same `skills/` directory as Claude Code.
+- **`.antigravity-plugin/plugin.json`** — minimal manifest for Antigravity, copied out (undotted) alongside `skills/` on install rather than referenced in place.
 - **`skills/development-pipeline/`** — one harness-agnostic orchestration skill: sizing rules, stage sequencing, API-contract handling, and delivery rules. On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time.
 - **`agents/`** — nine sub-agents (Claude Code only, dispatched by `skills/development-pipeline/` when sub-agent dispatch is available), each owning one stage:
   - `solution-architect` — functional + technical design (`.claude/design-plan.md`)
@@ -33,4 +34,12 @@ Or reference `plugins/development-pipeline/` directly as a local plugin director
 
 **Codex CLI** — `codex plugin marketplace add <this-repo>`, then `/plugins` to install. Runs every stage inline, same as Cursor.
 
-**Any other `SKILL.md`-reading runtime** (Gemini CLI, Antigravity, or standalone Claude Code without the marketplace) — copy `skills/development-pipeline/` into that project's own skills convention directory (see the [root README](../../README.md#gemini-cli-antigravity-no-plugin-system)).
+**Antigravity** — has a real plugin system but no marketplace; install by copying the plugin out flattened (see the [root README](../../README.md#antigravity)). Runs every stage inline, same as Cursor and Codex CLI — no `agents/` sub-agent dispatch on this runtime:
+
+```
+mkdir -p <your-project>/.agents/plugins/development-pipeline
+cp -r plugins/development-pipeline/skills <your-project>/.agents/plugins/development-pipeline/skills
+cp plugins/development-pipeline/.antigravity-plugin/plugin.json <your-project>/.agents/plugins/development-pipeline/plugin.json
+```
+
+**Any other `SKILL.md`-reading runtime** (Gemini CLI, or standalone Claude Code without the marketplace) — copy `skills/development-pipeline/` into that project's own skills convention directory (see the [root README](../../README.md#gemini-cli-no-plugin-system)).

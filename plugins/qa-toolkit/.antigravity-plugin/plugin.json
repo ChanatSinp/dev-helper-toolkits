@@ -1,0 +1,8 @@
+{
+  "name": "qa-toolkit",
+  "description": "QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode.",
+  "version": "0.3.0",
+  "author": {
+    "name": "AU.SP"
+  }
+}
