@@ -1,0 +1,53 @@
+{
+  "name": "dev-helper-toolkits",
+  "interface": {
+    "displayName": "dev-helper-toolkits"
+  },
+  "plugins": [
+    {
+      "name": "development-pipeline",
+      "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation, unit testing, technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/development-pipeline"
+      },
+      "category": "development-tools"
+    },
+    {
+      "name": "designer-toolkit",
+      "description": "Designer toolkit: prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/designer-toolkit"
+      },
+      "category": "design"
+    },
+    {
+      "name": "developer-toolkit",
+      "description": "Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/developer-toolkit"
+      },
+      "category": "development-tools"
+    },
+    {
+      "name": "product-toolkit",
+      "description": "Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/product-toolkit"
+      },
+      "category": "product"
+    },
+    {
+      "name": "qa-toolkit",
+      "description": "QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/qa-toolkit"
+      },
+      "category": "testing"
+    }
+  ]
+}
