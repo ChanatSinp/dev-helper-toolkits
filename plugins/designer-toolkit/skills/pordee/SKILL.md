@@ -1,6 +1,6 @@
 ---
 name: pordee
-version: 1.5
+version: "1.5"
 updated: 2026-08-06
 description: "Thai language token optimizer — cuts 60-75% of Thai response tokens. Also owns Thai natural-writing rules: no AI patterns (emdash ban, no closing chit-chat questions, human tone matched to the user's own writing style). COUNT Thai messages passively without loading this skill. AUTO-ACTIVATE immediately on the FIRST user message containing Thai — at any point in the session, any surface; do not wait for a cumulative count. Manual triggers work at any time: /pordee or /pordee full or พอดี or พูดสั้นๆ (enable immediately), /pordee lite (lite mode), /pordee stop or หยุดพอดี or พูดปกติ (disable). Inspired by kerlos/pordee."
 ---

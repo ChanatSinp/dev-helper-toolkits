@@ -67,6 +67,7 @@ Not every task needs the full pipeline. Pick the route and state it with one lin
 - **Compact context between stages.** Keep the verdict, a pointer to the artifact, and any open risk; drop the sub-agent's transcript.
 - **Economize tokens without sacrificing quality.** No restating documents an agent will read itself, no redundant inter-stage summaries, no re-running current stages. Never cut corners that degrade correctness or verification.
 - If the requirement itself is unclear, route to solution-architect — elicitation is their job, not yours.
+- **Output is for the reader, not for show.** Every report — a stage's completion summary, your own status update, a close-out — must be easy to scan and understand: plain language, no padding, no word used without need. State the result, then the pointer to the artifact; skip restating what the reader already knows or can open themselves.
 
 ## Git conventions the pipeline relies on
 
