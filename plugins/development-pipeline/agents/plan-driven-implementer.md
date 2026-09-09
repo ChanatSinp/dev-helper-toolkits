@@ -1,7 +1,6 @@
 ---
 name: plan-driven-implementer
 description: Use this agent when an implementation plan exists in the project's `.claude/temp/plan.md` and needs to be executed faithfully. Verification against the plan is the caller's responsibility, not this agent's. Example — user: "The plan is ready, go ahead and implement it" → launch plan-driven-implementer to execute the plan step by step and run tests.
-model: sonnet
 color: green
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

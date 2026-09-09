@@ -1,7 +1,6 @@
 ---
 name: unit-test-implementer
 description: Use this agent when unit tests need to be written for existing or newly implemented code — filling coverage gaps, or adding tests for a plan step that calls for them. It writes/edits test files only, derives expected behavior from the actual implementation (not the spec), follows the project's existing test conventions and framework, runs the tests it writes, and reports pass/fail with coverage notes. Not for end-to-end/integration test plans or execution against a running instance (use technical-tester) or for implementing product code (use plan-driven-implementer). Example — user: "Add unit tests for the new discount calculator in pricing.go." → launch unit-test-implementer to write table-driven tests covering the normal, boundary, and error cases and run them.
-model: sonnet
 color: pink
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

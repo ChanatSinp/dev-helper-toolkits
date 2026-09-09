@@ -1,7 +1,6 @@
 ---
 name: technical-tester
 description: Use this agent when a testing plan needs to be written or implemented changes need to be tested/verified. It derives test scenarios from `.claude/design-plan.md`, `.claude/temp/plan.md`, and the actual code, writes them to `.claude/testing-plan.md`, and — when an implementation exists — executes the tests and reports results. Use it after upstream plans exist, after plan-driven-implementer finishes, or when the user asks for a test plan or verification of existing endpoints. Example — user: "Implementation is done, verify it works." → launch technical-tester to execute the testing plan and report pass/fail results with evidence.
-model: sonnet
 color: orange
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

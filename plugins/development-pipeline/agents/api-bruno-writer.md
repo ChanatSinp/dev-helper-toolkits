@@ -1,7 +1,6 @@
 ---
 name: api-bruno-writer
 description: Use this agent to turn documented APIs into a runnable Bruno collection. It reads the project's `.claude/api/api-specs.md` and writes an OpenCollection 1.0.0 YAML collection under `.claude/api/bruno/` — `opencollection.yml`, one `.yml` request file per endpoint, and `environments/*.yml` — ready to open in Bruno. Use it after api-specs-writer has produced or updated the API doc, or when the user asks for a Bruno collection. Example — user: "Generate the Bruno collection for the operator API." → launch api-bruno-writer to produce `.claude/api/bruno/<Collection>/` from `.claude/api/api-specs.md`.
-model: sonnet
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

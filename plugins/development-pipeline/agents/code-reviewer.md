@@ -1,7 +1,6 @@
 ---
 name: code-reviewer
 description: Use this agent after code changes are made and need review for correctness, edge cases, security, and performance. It writes a review report to the project's `.claude/temp/code-review.md` and never modifies source code. Example — user: "Fixed the bug in the payment handler where negative amounts were accepted." → launch code-reviewer to verify the fix and check related edge cases (zero amounts, overflow, concurrent requests).
-model: sonnet
 color: red
 tools: Read, Glob, Grep, Bash, Write, Skill
 ---

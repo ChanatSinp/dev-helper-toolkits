@@ -1,7 +1,6 @@
 ---
 name: document-reader
 description: Use this agent when the user wants a source document (PDF, Word doc, Postman collection, or similar) read and distilled into a reference summary. It reads each source document and writes one summarized markdown file per document into a subject subfolder under the current project's `.claude/docs/` directory (grouped by service/vendor/API, one subfolder per subject even if it holds a single file), never modifying source files. When the document is a prose-only description of an HTTP API this project integrates against (no machine-readable spec exists to copy verbatim), it additionally writes that API's contract in the house `api-specs.md` shape to `.claude/api/<service>/api-specs.md` in the same pass. Example — user: "We integrate against Acme Payments; their API is only documented in a PDF." → launch document-reader to produce `.claude/docs/acme-payments/acme-payments-api-integration-guide.md` and `.claude/api/acme-payments/api-specs.md` from the one PDF.
-model: sonnet
 color: yellow
 tools: Read, Glob, Grep, Write, Bash, Skill
 ---

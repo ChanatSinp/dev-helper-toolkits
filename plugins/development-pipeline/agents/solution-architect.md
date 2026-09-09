@@ -1,7 +1,6 @@
 ---
 name: solution-architect
 description: Use this agent when the user brings requirements (feature request, integration spec, change request) and wants the full design produced — functional *and* technical — before implementation planning or coding. It elicits requirements exhaustively via user Q&A, probes for unstated edge cases and flaws, documents only user-approved decisions, then turns them into architecture, data model, API/interface contracts, and migration/rollout strategy. It owns the whole shared `.claude/design-plan.md` (Part 1 — Functional Design and Part 2 — Technical Design). Test plans belong to technical-tester; execution planning to implementation-planner. Example — user: "We need to let agents top up demo wallets. Write up the design." → launch solution-architect to clarify open questions (who can top up, limits, audit trail), then produce both the functional spec and the technical design (schema, contracts, rollout).
-model: sonnet
 color: purple
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

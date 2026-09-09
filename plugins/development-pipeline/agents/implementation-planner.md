@@ -1,7 +1,6 @@
 ---
 name: implementation-planner
 description: Use this agent when the user wants a detailed implementation plan created before any code is written — new features, refactors, bug fixes, or architectural changes needing upfront planning with edge case analysis. It writes the plan to the project's `.claude/temp/plan.md` for other agents to execute. Example — user: "We need to refactor the payment module to support multiple currencies. Create a plan." → launch implementation-planner to produce the structured plan in .claude/temp/plan.md.
-model: sonnet
 color: blue
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---

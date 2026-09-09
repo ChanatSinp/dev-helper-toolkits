@@ -1,7 +1,6 @@
 ---
 name: api-specs-writer
 description: Use this agent to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's `.claude/api/api-specs.md` — path, method, headers, payload, response, examples, and a plain-language description per endpoint, plus a human-readable summary aimed at frontend implementers. Use it after API endpoints are implemented or changed, or when the user asks for API documentation. Example — user: "The operator endpoints are done, write the API doc." → launch api-specs-writer to produce `.claude/api/api-specs.md` from the implemented handlers.
-model: sonnet
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit, Skill
 ---
