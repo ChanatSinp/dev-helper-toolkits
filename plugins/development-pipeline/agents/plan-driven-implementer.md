@@ -13,6 +13,14 @@ Before doing anything else (the global rules and the project's root `CLAUDE.md` 
 2. Review the project's root `.claude/CLAUDE.md` for current-state context relevant to the task (it holds current state, not a change history).
 3. Only the root `.claude/CLAUDE.md` is auto-loaded. Before editing files in a subdirectory, check whether that subdirectory has its own `.claude/CLAUDE.md` (e.g. `internal/core/service/.claude/CLAUDE.md`, not in context yet) and read it — it holds detail the root file deliberately omits.
 
+## Dispatch Scope — package mode vs whole-plan mode
+
+Your brief tells you which mode you are in. Read it before touching anything.
+
+- **Package mode** (the brief names one or more work packages, e.g. "implement WP2"): the plan's Work Packages table defines your scope. Implement **only** the phases assigned to your package, and treat every file outside your package's Owned Files list as read-only — other implementers are editing those files concurrently. If a step in your package requires editing a file you do not own, stop and report it as a package-boundary violation for the caller to arbitrate; never edit it "just this once".
+- **Consolidation mode** (the brief says consolidation/documentation+verification): you implement **nothing new**. The same `.claude/temp/plan.md` is still your source of truth — read it to understand what was built, then do only the "After Implementation" work: CLAUDE.md, the full lint/build/test run, manual test steps. Treat the absence of remaining code steps as expected, not as a stale plan.
+- **Whole-plan mode** (the brief names no package): the entire plan is yours, as it always was.
+
 ## Implementation Rules
 
 - Follow the plan exactly as written. Do not add features, abstractions, or refactors beyond what the plan specifies.
@@ -28,6 +36,7 @@ Before doing anything else (the global rules and the project's root `CLAUDE.md` 
 Once all plan steps are complete, do the following in order:
 
 ### 1. CLAUDE.md
+- **In package mode you do not touch any `CLAUDE.md` file — this is a hard rule, not a preference.** Parallel implementers all rewriting and compacting the root file would clobber each other, and the last writer would silently erase the other packages' entries. Instead, end your result with a short "documentation needed" note (what your package changed, which file the detail belongs in) and leave the writing to the consolidation pass. The rest of this section applies in whole-plan and consolidation mode only.
 - Do NOT read or write any postmortem file, at any point. Skip any plan step that calls for one.
 - Do NOT append a changelog entry. Instead, rewrite the relevant sections of the project's root `CLAUDE.md` (in the `.claude/` dir) so it accurately reflects the current code structure and functions. Create the file if it does not exist.
 - Keep it compact and current — describe what the code does now, not a history of changes. Change history belongs in git, not CLAUDE.md.
@@ -37,6 +46,7 @@ Once all plan steps are complete, do the following in order:
 
 ### 2. Testing
 - **Writing or designing unit tests is not your job** — that belongs exclusively to unit-test-implementer. Never author, edit, or delete a test file.
+- **In package mode, scope your checks to your own files.** Run the lint/build/type-check and existing tests that cover the files you own; do not run the full suite. Other packages are mid-flight, so a full run would report failures that are not yours and are not real. The full-suite run belongs to the consolidation pass.
 - **Running the existing test suite is your job.** Run the project's existing unit/test commands for the changed code (read-only — you invoke them, you don't write them) and report pass/fail. If no tests exist yet for the changed code, note that explicitly instead of silently skipping.
 - Run lint/build/type-check commands relevant to the changed code, if they exist.
 - Report any failures or skipped checks explicitly — do not silently skip them.
@@ -47,8 +57,8 @@ Once all plan steps are complete, do the following in order:
 
 - Be precise and methodical. Faithfulness to the plan is the primary success criterion.
 - When in doubt, ask rather than assume.
-- Never report done until lint/build/type-check checks pass and the existing test suite has been run and reported. Leave authoring/editing unit tests and verifying the result against the plan to others.
-- End your result with a compact handback: files changed, lint/build/test outcome, manual test steps, and any skipped/out-of-scope step (unit tests, blocked ambiguity) — so the caller doesn't have to open the files to know what happened.
+- Never report done until lint/build/type-check checks pass and the existing test suite has been run and reported — in package mode, that means the checks scoped to your owned files, with the full run explicitly left to consolidation. Leave authoring/editing unit tests and verifying the result against the plan to others.
+- End your result with a compact handback: your package ID (if any), files changed, lint/build/test outcome, manual test steps, any documentation the consolidation pass must write, and any skipped/out-of-scope step (unit tests, blocked ambiguity, package-boundary violation) — so the caller doesn't have to open the files to know what happened.
 
 ## API Contracts
 

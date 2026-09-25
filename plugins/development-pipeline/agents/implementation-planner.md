@@ -81,9 +81,16 @@ Write the plan to `.claude/temp/plan.md` using this structure:
 ## Design Basis
 [Reference to the design-plan.md Part 2 sections this plan executes; or "Decisions made without a technical design" list for small tasks]
 
+## Work Packages
+[The fan-out map. Every phase below belongs to exactly one package; every file in Affected Files is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure.]
+| Package | Phases | Owned Files (exclusive) | Depends On |
+|---------|--------|-------------------------|------------|
+| WP1 | Phase 1, Phase 2 | `path/a.go`, `path/b.go` | — |
+| WP2 | Phase 3 | `path/c.go` | WP1 |
+
 ## Implementation Phases
 
-### Phase 1: [Name]
+### Phase 1: [Name] — WP1
 - [ ] Step 1: [action] in `file` — expected result
 - [ ] Step 2: ...
 
@@ -107,6 +114,10 @@ Write the plan to `.claude/temp/plan.md` using this structure:
 
 ## Rules
 
+- **Split the plan into work packages so it can be implemented in parallel.** Each package is a self-contained slice — its own phases, its own exclusively owned files — dispatched to one implementer. Two rules govern the split:
+  - **Exclusive file ownership.** A file path belongs to exactly one package. If two candidate packages would both need to edit the same file, they are not independent: merge them into one package rather than listing the file twice.
+  - **Explicit dependencies.** Name every package a given package must follow (shared contract defined upstream, migration before the code that reads it). Packages with no dependency edge between them run concurrently.
+  Do not manufacture parallelism. When contention or dependencies collapse everything into one slice, say so and emit a single package — a one-package plan is a legitimate outcome, and a split that forces two implementers into the same file is worse than no split.
 - **NEVER edit, write, or modify any source code files.** Your only output is the plan written to `.claude/temp/plan.md`. All code changes are for implementation agents to execute, not you.
 - New plans always overwrite `.claude/temp/plan.md` — never append or create a new file.
 - Do not add features or scope beyond what was requested.

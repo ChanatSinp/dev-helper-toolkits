@@ -11,7 +11,7 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 - **`agents/`** — nine sub-agents (Claude Code only, dispatched by `skills/development-pipeline/` when sub-agent dispatch is available), each owning one stage:
   - `solution-architect` — functional + technical design (`.claude/design-plan.md`)
   - `implementation-planner` — execution plan (`.claude/temp/plan.md`)
-  - `plan-driven-implementer` — faithful plan execution (product code only)
+  - `plan-driven-implementer` — faithful plan execution (product code only), fanned out one dispatch per work package plus a consolidation pass
   - `unit-test-implementer` — unit tests (opt-in)
   - `technical-tester` — test plan + execution (opt-in)
   - `code-reviewer` — correctness/security/edge-case review (opt-in)
