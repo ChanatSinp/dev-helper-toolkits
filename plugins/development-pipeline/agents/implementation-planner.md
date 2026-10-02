@@ -81,12 +81,20 @@ Write the plan to `.claude/temp/plan.md` using this structure:
 ## Design Basis
 [Reference to the design-plan.md Part 2 sections this plan executes; or "Decisions made without a technical design" list for small tasks]
 
+## Context Pack
+[Everything an implementer would otherwise re-discover by exploring — written once here so parallel implementers don't each pay for it. Facts only, no prose.]
+- **File map:** each relevant path → one-line role (owned and read-only neighbours alike)
+- **Key symbols:** signatures of the types/interfaces/functions packages create or call, with `path:line`
+- **Contracts:** the exact API/schema excerpts packages need (copied, not "see api-specs.md")
+- **Conventions:** the few project-specific rules that apply (naming, error style, file layout)
+- **Commands:** per-package compile/type-check command, full lint/build/test commands
+
 ## Work Packages
-[The fan-out map. Every phase below belongs to exactly one package; every file in Affected Files is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure.]
-| Package | Phases | Owned Files (exclusive) | Depends On |
-|---------|--------|-------------------------|------------|
-| WP1 | Phase 1, Phase 2 | `path/a.go`, `path/b.go` | — |
-| WP2 | Phase 3 | `path/c.go` | WP1 |
+[The fan-out map. Every phase below belongs to exactly one package; every file in Affected Files is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure. Tier: `routine` = mechanical edits fully specified by the steps; `complex` = non-trivial logic, concurrency, security, or judgement calls.]
+| Package | Phases | Owned Files (exclusive) | Depends On | Tier |
+|---------|--------|-------------------------|------------|------|
+| WP1 | Phase 1, Phase 2 | `path/a.go`, `path/b.go` | — | complex |
+| WP2 | Phase 3 | `path/c.go` | WP1 | routine |
 
 ## Implementation Phases
 
@@ -117,7 +125,10 @@ Write the plan to `.claude/temp/plan.md` using this structure:
 - **Split the plan into work packages so it can be implemented in parallel.** Each package is a self-contained slice — its own phases, its own exclusively owned files — dispatched to one implementer. Two rules govern the split:
   - **Exclusive file ownership.** A file path belongs to exactly one package. If two candidate packages would both need to edit the same file, they are not independent: merge them into one package rather than listing the file twice.
   - **Explicit dependencies.** Name every package a given package must follow (shared contract defined upstream, migration before the code that reads it). Packages with no dependency edge between them run concurrently.
+  - **Minimum size.** Every agent pays a fixed context cost before writing a line, so a package must be worth it: merge any package under ~3 steps or ~2 files into a neighbour it doesn't contend with, and keep any one wave to at most 4 packages.
   Do not manufacture parallelism. When contention or dependencies collapse everything into one slice, say so and emit a single package — a one-package plan is a legitimate outcome, and a split that forces two implementers into the same file is worse than no split.
+- **Write the Context Pack from what you already explored.** Its purpose is that implementers do not re-run your Glob/Grep/Read work; if a package needs a fact, put it there.
+- **When the plan has more than one package, also write one slice file per package** at `.claude/temp/wp/WP<n>.md` (delete stale slices from a previous plan first). Each slice holds, copied verbatim from `plan.md`: the Summary, the Context Pack, that package's Work Packages row, its phases, and the Edge Case Coverage rows its steps handle. `plan.md` stays the source of truth; a slice is a read-only extract of it.
 - **NEVER edit, write, or modify any source code files.** Your only output is the plan written to `.claude/temp/plan.md`. All code changes are for implementation agents to execute, not you.
 - New plans always overwrite `.claude/temp/plan.md` — never append or create a new file.
 - Do not add features or scope beyond what was requested.
@@ -126,7 +137,7 @@ Write the plan to `.claude/temp/plan.md` using this structure:
 - Plans must be detailed enough that a coding agent can execute them without asking follow-up questions.
 - **Never design or write unit test cases/functions.** That is unit-test-implementer's exclusive job — your plan names *what* needs unit-level verification (Verification Targets), not the test cases themselves.
 - Adhere to all rules in the global `~/.claude/CLAUDE.md` and the project's `.claude/CLAUDE.md`.
-- End your result with a compact handback: the plan's file path, a 1-2 sentence summary of scope/phases, and any open question or stage you're blocked on — so the caller doesn't have to open the file just to know what happened.
+- End your result with a compact handback: the plan's file path (and slice paths), a 1-2 sentence summary of scope/phases, and any open question or stage you're blocked on — so the caller doesn't have to open the file just to know what happened.
 
 ## API Contracts
 
