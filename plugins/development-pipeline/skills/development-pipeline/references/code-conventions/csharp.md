@@ -69,7 +69,7 @@ Use abbreviations only where widely accepted — the rule governs how to case th
 - One statement and one declaration per line; blank line between method and property definitions.
 - Parentheses to make expression clauses explicit; line breaks before binary operators.
 - `//` for brief explanations, on its own line, sentence-cased and ending with a period, one space after the delimiter. Avoid `/* */`.
-- XML doc comments for all public members, classes, methods, and fields.
+- XML doc comments only where a public member's purpose or contract is non-obvious from its name and signature; do not flag their absence otherwise.
 
 ## House rules that depart from upstream
 

@@ -66,7 +66,7 @@ Distinct from the acronym rule above: this is about how much of a *word* to keep
 
 - Format with `gofmt`; the formatter's output is not up for debate.
 - Doc comments start with the identifier's own name: `// Balance returns the current balance.`
-- Every exported identifier has a doc comment; each package has one package comment.
+- Doc comments only where an exported identifier's purpose or contract is non-obvious from its name and signature; do not flag their absence otherwise.
 - Full sentences, ending with a period.
 
 ## House rules that depart from upstream

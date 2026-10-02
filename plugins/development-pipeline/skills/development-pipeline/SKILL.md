@@ -95,4 +95,4 @@ Not every task needs the full pipeline. Pick the route and state it with one lin
 
 ## Bug review
 
-List every issue found, each with fix options and concrete steps; wait for the user's choice before applying any fix.
+Walk the user through each issue one at a time, highest severity first, with fix options and concrete steps (see Delivery rules); apply no fix until the user has chosen it.
