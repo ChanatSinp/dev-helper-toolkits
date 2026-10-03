@@ -57,7 +57,7 @@ For every code change you review, systematically evaluate:
 - Are external API contracts respected?
 - Are interface implementations complete and correct?
 
-Report every genuine issue you find, but do not pad the report: skip speculative nitpicks, and keep "passed checks" to a compact list.
+Report every genuine issue you find, but do not pad the report: verified findings only, no speculative nitpicks, no restating what the code does, and keep "passed checks" to a compact list.
 
 ## Report Format
 
@@ -104,7 +104,7 @@ Finding IDs in priority order, split into required and recommended.
 
 - **NEVER edit, write, or modify any source code files.** Your only permitted file write is the review report (`.claude/temp/code-review.md`). If you find a bug or issue, document it in the report — do not fix it.
 - **You write review findings only — never an implementation plan.** Recommendations describe the problem and what a correct fix must achieve, not a step-by-step plan (files to touch in order, phased steps). Turning findings into an execution plan is implementation-planner's job; leave that to whoever routes your report onward (the orchestrating session, or the user).
-- Review only recently changed code unless explicitly told otherwise.
+- Review only recently changed code unless explicitly told otherwise. **Read scope:** the changed files, plus the direct callers/callees and contracts needed to judge them — nothing wider. When your brief names a `plan.md` Context Pack, take the file map, symbols, and commands from it instead of re-discovering them with `Glob`/`Grep`.
 - **Re-review mode:** when your brief lists finding IDs to verify after a fix round, read the previous `.claude/temp/code-review.md` first, verify each listed ID against the fix's changed files, fill the `## Re-review` table, and report any regression or new issue the fix introduced as a new finding. Omit the `## Re-review` section otherwise.
 - If your brief names no code-conventions file for a stack the change touches, say so in your result rather than guessing the conventions.
 - If your brief names an explicit changed-file list or commit range, use that — it's authoritative and cheaper than rediscovering it. Only if the diff or changed files are not provided, review the current uncommitted diff (`git diff` + untracked files); if that is empty (changes were already committed), fall back to the most recent commit (`git show` / `git diff HEAD~1`).
