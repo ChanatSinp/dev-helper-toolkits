@@ -9,15 +9,15 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 - **`.antigravity-plugin/plugin.json`** — minimal manifest for Antigravity, copied out (undotted) alongside `skills/` on install rather than referenced in place.
 - **`skills/development-pipeline/`** — one harness-agnostic orchestration skill: sizing rules, stage sequencing, API-contract handling, and delivery rules. On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time.
 - **`agents/`** — nine sub-agents (Claude Code only, dispatched by `skills/development-pipeline/` when sub-agent dispatch is available), each owning one stage:
-  - `solution-architect` — functional + technical design (`.claude/design-plan.md`)
+  - `solution-architect` — functional + technical design (`.claude/design-plan.md`, with a feature index and shared invariants at the top so later stages read only their sections)
   - `implementation-planner` — execution plan (`.claude/temp/plan.md`)
-  - `plan-driven-implementer` — faithful plan execution (product code only), one dispatch for the whole plan, or — at 3+ packages or 2+ `complex` ones — fanned out one dispatch per work package (each reading only its `.claude/temp/wp/` slice and shared Context Pack; `routine` packages on Sonnet) plus a consolidation pass
+  - `plan-driven-implementer` — faithful plan execution (product code only), one dispatch for the whole plan, or — at 3+ packages or 2+ `complex` ones — fanned out one dispatch per work package (each reading only its `.claude/temp/wp/` slice, which carries the shared Context Pack entries plus its own package's; `routine` packages on Sonnet) plus a Sonnet consolidation pass that writes the full lint/build/test output to `.claude/temp/verify.log`; small code-review fix rounds are dispatched directly from the selected findings, larger ones through a "(fix round N)" phase added to the plan
   - `unit-test-implementer` — unit tests (opt-in)
   - `technical-tester` — test plan + execution (opt-in)
-  - `code-reviewer` — correctness/security/edge-case review (opt-in)
+  - `code-reviewer` — correctness/security/edge-case review (opt-in), run with its fix/re-review loop before the other post-implementation stages
   - `document-reader` — distills source documents into `.claude/docs/` summaries
-  - `api-specs-writer` — documents this project's own HTTP API (opt-in)
-  - `api-bruno-writer` — generates a Bruno collection from the API doc (opt-in)
+  - `api-specs-writer` — documents this project's own HTTP API (opt-in, on Sonnet)
+  - `api-bruno-writer` — generates a Bruno collection from the API doc (opt-in, on Sonnet)
 
 ## Install
 
