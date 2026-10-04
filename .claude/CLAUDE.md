@@ -18,4 +18,5 @@ Multi-harness plugin marketplace (Claude Code, Cursor, Codex CLI, Antigravity; G
   - implementation-planner's in-place fix rounds cover selected review findings and verification failures.
   - plan-driven-implementer has four modes (Package, Consolidation, Direct fix, Whole-plan); direct fix takes selected review findings or failing `verify.log` lines.
   - Evidence logs in `.claude/temp/`: `verify.log` (implementer, outside package mode), `unit-test.log` (unit-test-implementer), `test-results.md` (technical-tester), each with `== <command> exit=<code>` lines and captured by shell redirection, never through an agent's context; technical-tester keeps one indexed `.claude/testing-plan.md`.
+  - unit-test-implementer, technical-tester and code-reviewer never run by default: only when the user names them or selects them in the sizing question; a stale-test fix asks first. Their agent descriptions say so too, to stop proactive dispatch outside the pipeline.
   - A version bump touches all four `plugin.json` manifests.

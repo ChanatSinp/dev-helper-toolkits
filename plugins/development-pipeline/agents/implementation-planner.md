@@ -87,7 +87,7 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - [WP1] Contracts: the exact API/schema excerpt the package needs (copied, not "see api-specs.md")
 - [shared] Conventions: a project-specific rule that applies (naming, error style, file layout)
 - [WP1] Commands: the package's compile/type-check command
-- [shared] Commands: the full lint/build/test commands
+- [shared] Commands: the full lint/build/test commands — each must exit non-zero when its check fails, so wrap a check that only prints: `test -z "$(gofmt -l .)"`, never bare `gofmt -l .`
 
 ## Work Packages
 [The fan-out map. Every phase below belongs to exactly one package; every file the File map marks as created or modified is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure. Tier: `routine` = mechanical edits fully specified by the steps; `complex` = non-trivial logic, concurrency, security, or judgement calls.]
@@ -147,6 +147,8 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - Plans must be detailed enough that a coding agent can execute them without asking follow-up questions.
+- **Never plan a `CLAUDE.md` edit.** No `CLAUDE.md` is an owned file in the Work Packages table and no step edits one — documentation is plan-driven-implementer's own After Implementation work (the consolidation pass after a fan-out), never a plan step.
+- **Every command in the Context Pack must carry its verdict in its exit code.** The caller's evidence is the `== <command> exit=<code>` line alone, so a command that reports failure only by printing would always read as a pass — write it wrapped so that it fails.
 - **Never design or write unit test cases/functions.** That is unit-test-implementer's exclusive job — your plan names *what* needs unit-level verification (Verification Targets), not the test cases themselves.
 - Adhere to the project's `.claude/CLAUDE.md` first, then the conventions file(s) named in your brief. Where both are silent, plan steps fall back to the same rules implementers fall back to: no comments unless the *why* is non-obvious, no scope beyond the request, validation only at system boundaries, no emojis.
 - End your result with a compact handback, so the caller dispatches from it without opening the file: the plan's file path (and slice paths), a 1-2 sentence summary of scope/phases, the Work Packages table reduced to Package / Depends On / Tier (in a fix round, only the packages that round touches), the `[shared]` full lint/build/test commands verbatim, the Verification Targets marked "unit" (one line each), and any open question or stage you're blocked on.
