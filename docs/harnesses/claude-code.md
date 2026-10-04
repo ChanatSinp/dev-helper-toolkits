@@ -16,8 +16,15 @@ Claude Code auto-discovers a plugin's `agents/` and `skills/` directories from i
 
 ## Without the marketplace
 
-If a project isn't using the Claude Code plugin marketplace, copy the skill manually under `.claude/skills/`. For a plugin with sub-agents, you lose the dispatch (no `agents/` directory to copy alongside it), so it falls back to the same inline, one-stage-at-a-time behavior Codex and Cursor use:
+If a project isn't using the Claude Code plugin marketplace, copy the skill manually under `.claude/skills/`:
 
 ```
 cp -r plugins/<plugin-name>/skills/<skill-name> <your-project>/.claude/skills/<skill-name>
+```
+
+For a plugin with sub-agents, also copy its agents into `.claude/agents/`. Claude Code loads them from there as project sub-agents, so the skill can still dispatch them, and it is where the skill looks (`../../agents/` from the skill directory) when it runs a stage inline:
+
+```
+mkdir -p <your-project>/.claude/agents
+cp plugins/<plugin-name>/agents/*.md <your-project>/.claude/agents/
 ```

@@ -12,6 +12,12 @@ cp plugins/<plugin-name>/.antigravity-plugin/plugin.json <your-project>/.agents/
 
 (Swap the destination for `~/.gemini/config/plugins/<plugin-name>/` to install globally instead.)
 
+If the plugin ships `agents/`, copy it too — its skill reads those files as stage definitions (`../../agents/` from the skill directory):
+
+```
+cp -r plugins/<plugin-name>/agents <your-project>/.agents/plugins/<plugin-name>/agents
+```
+
 Plugins are enabled by default once discovered; toggle with `agy plugin enable|disable <plugin-name>` or from the Antigravity settings UI.
 
-`agents/` (Claude Code sub-agents) has no Antigravity equivalent — the skill runs every stage inline in the same session instead, same as on Cursor and Codex CLI.
+`agents/` (Claude Code sub-agents) has no Antigravity equivalent — the skill runs every stage inline in the same session instead, same as on Cursor and Codex CLI; here it reads each stage's definition from the `agents/` directory copied above.

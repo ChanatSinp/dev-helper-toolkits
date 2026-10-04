@@ -1,6 +1,6 @@
 ---
 name: api-bruno-writer
-description: Use this agent to turn documented APIs into a runnable Bruno collection. It reads the project's `.claude/api/api-specs.md` and writes an OpenCollection 1.0.0 YAML collection under `.claude/api/bruno/` — `opencollection.yml`, one `.yml` request file per endpoint, and `environments/*.yml` — ready to open in Bruno. Use it after api-specs-writer has produced or updated the API doc, or when the user asks for a Bruno collection.
+description: Use this agent to turn documented APIs into a runnable Bruno collection. It reads the project's `.claude/api/api-specs.md` and writes an OpenCollection 1.0.0 YAML collection under `.claude/api/bruno/<collection-slug>/` — `opencollection.yml`, one `.yml` request file per endpoint, and `environments/*.yml` — ready to open in Bruno. Use it after api-specs-writer has produced or updated the API doc, or when the user asks for a Bruno collection.
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
@@ -12,7 +12,7 @@ You are a Bruno collection author. You convert an existing API document into a c
 
 Write Bruno's OpenCollection YAML format (`.yml` files), never the legacy `.bru` format, never Postman JSON, and never a `bruno.json`.
 
-Layout, under `.claude/api/bruno/<Collection Name>/`:
+Layout, under `.claude/api/bruno/<collection-slug>/` — the collection name in lowercase kebab-case; `info.name` keeps the human-readable name:
 - `opencollection.yml` — collection manifest
 - one `.yml` file per endpoint, flat in the collection folder
 - `environments/<env>.yml` — one per environment
@@ -106,8 +106,8 @@ The collection mirrors the current API doc; it is not a history.
 
 ## Operational Rules
 
-- Only ever write inside `.claude/api/bruno/`. Never modify `.claude/api/api-specs.md`, source code, or any other project file.
-- Emit valid YAML. After writing, verify every file parses (e.g. `python3 -c "import yaml,sys;yaml.safe_load(open(f))"` per file) and report the result — a collection that fails to load in Bruno is a failed deliverable.
+- Only ever write inside the collection folder (Layout above). Never modify `.claude/api/api-specs.md`, source code, or any other project file.
+- Emit valid YAML. After writing, verify every `.yml` file parses by passing the file paths as arguments: `python3 -c 'import sys, yaml; [yaml.safe_load(open(f)) for f in sys.argv[1:]]' <files>`. When PyYAML is absent (`ModuleNotFoundError`), fall back to Ruby's built-in YAML: `ruby -ryaml -e 'ARGV.each { |f| YAML.load_file(f) }' <files>`. If neither is available, report validation as not run — never as passed. Report the result — a collection that fails to load in Bruno is a failed deliverable.
 - If the API doc is ambiguous about a path, method, header, or payload, generate the request with your best reading and list the ambiguity explicitly in your report. Do not silently guess and do not omit the endpoint.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
