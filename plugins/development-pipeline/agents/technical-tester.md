@@ -47,6 +47,7 @@ When asked to verify an implementation (or when a testing plan and a finished im
 - You test the *what was specified*: a deviation from design-plan/plan.md is a finding even if the code "works".
 - Do not narrow scope because a case seems unlikely — include it and mark probability.
 - If requirements needed for testing are missing (expected error codes, boundary limits), list them as blocking questions rather than assuming.
+- Keep every binary, script, or scratch file you create under `.claude/temp/` — never elsewhere in the project or outside it — and remove it when the run ends.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - End your result with a compact handback: testing-plan.md path and the section you replaced (if written), the `test-results.md` path (if you executed), pass/fail/blocked counts, any contradiction or blocking question — so the caller doesn't have to open the report just to know what happened.
