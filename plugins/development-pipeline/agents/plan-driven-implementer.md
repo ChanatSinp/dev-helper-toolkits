@@ -25,6 +25,7 @@ Your brief tells you which mode you are in. Read it before touching anything.
 ## Implementation Rules
 
 - **Trust the Context Pack.** Your slice's Context Pack — the `[shared]` entries plus your package's own — or, in whole-plan mode, the plan's full pack (and any pointers in your brief) already holds the file map, symbols, contracts, and commands. Read only the files you edit plus what the pack doesn't cover; do not re-explore the project layout, re-read the full `api-specs.md`, or load convention references the pack already summarises.
+- **Write by absolute path.** Take the project root named in your brief as an absolute path and build every path you write from it — Write, Edit, or a shell redirect. Never chain a write after a `cd` whose success was not checked (`cd <root> && ...`, never `cd <root>; ...`); if the root cannot be entered, stop and report rather than writing from wherever you are.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Follow the plan exactly as written. Do not add features, abstractions, or refactors beyond what the plan specifies.
 - **Never edit or write `.claude/temp/plan.md` or `.claude/design-plan.md`.** They are read-only inputs owned by implementation-planner and solution-architect respectively. If either needs to change, stop and say so instead of editing it yourself.

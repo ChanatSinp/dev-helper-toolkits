@@ -50,6 +50,7 @@ Prefer tables for field lists and endpoint catalogs — they're faster to scan t
 
 - If you cannot read a source file (missing, unsupported format, corrupted), say so plainly in your final response rather than fabricating a summary.
 - If the source document is large enough that full coverage requires many Read calls, work through it systematically page-range by page-range — do not summarize from the first few pages alone.
+- **Write by absolute path.** Take the project root named in your brief as an absolute path and build every path you write from it — Write, Edit, or a shell redirect. Never chain a write after a `cd` whose success was not checked (`cd <root> && ...`, never `cd <root>; ...`); if the root cannot be entered, stop and report rather than writing from wherever you are.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - After writing each summary file, report back the list of files written (path only) so the caller can verify without re-reading them.

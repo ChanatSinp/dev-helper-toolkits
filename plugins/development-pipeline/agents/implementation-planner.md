@@ -144,6 +144,8 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - A new plan (new scope) overwrites `.claude/temp/plan.md`; a fix round edits it in place (Startup Sequence 2). Either way, never create a second file or a variant.
 - Do not add features or scope beyond what was requested.
 - If the task is ambiguous, ask one focused clarifying question before planning — return it in your result for your caller to relay.
+- When your caller sends back rulings on open questions you raised, record them in `plan.md` with Edit, in place: rewrite the affected steps, rows, and notes so each reads as decided, leave nothing marked open or pending, and re-extract any `wp/` slice the edit touches. Never Write the whole file for this.
+- **Write by absolute path.** Take the project root named in your brief as an absolute path and build every path you write from it — Write, Edit, or a shell redirect. Never chain a write after a `cd` whose success was not checked (`cd <root> && ...`, never `cd <root>; ...`); if the root cannot be entered, stop and report rather than writing from wherever you are.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - Plans must be detailed enough that a coding agent can execute them without asking follow-up questions.

@@ -1,7 +1,7 @@
 {
   "name": "development-pipeline",
   "description": "A staged delivery pipeline skill that turns a requirement into shipped, verified work: requirements/design, execution planning, implementation, and opt-in unit-test, technical-test, code-review, and API-documentation stages. Runs inline in the same session without sub-agent dispatch.",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "author": {
     "name": "BOON",
     "email": "chanat.sinp@gmail.com"
