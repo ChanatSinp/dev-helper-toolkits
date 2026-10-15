@@ -90,11 +90,11 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - [shared] Commands: the full lint/build/test commands — each must exit non-zero when its check fails, so wrap a check that only prints: `test -z "$(gofmt -l .)"`, never bare `gofmt -l .`
 
 ## Work Packages
-[The fan-out map. Every phase below belongs to exactly one package; every file the File map marks as created or modified is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure. Tier: `routine` = mechanical edits fully specified by the steps; `complex` = non-trivial logic, concurrency, security, or judgement calls.]
-| Package | Phases | Owned Files (exclusive) | Depends On | Tier |
-|---------|--------|-------------------------|------------|------|
-| WP1 | Phase 1, Phase 2 | `path/a.go`, `path/b.go` | — | complex |
-| WP2 | Phase 3 | `path/c.go` | WP1 | routine |
+[The fan-out map. Every phase below belongs to exactly one package; every file the File map marks as created or modified is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure. Tier: `routine` = mechanical edits fully specified by the steps; `complex` = non-trivial logic, concurrency, security, or judgement calls. Owner: `cdk` for AWS CDK infrastructure code (stacks, constructs, CDK app entry, `cdk.json`), executed by cdk-implementer; `app` for everything else. Never mix the two in one package; a `cdk` package's Commands entry is its `cdk synth`, and the `[shared]` commands include `cdk synth` too.]
+| Package | Phases | Owned Files (exclusive) | Depends On | Tier | Owner |
+|---------|--------|-------------------------|------------|------|-------|
+| WP1 | Phase 1, Phase 2 | `path/a.go`, `path/b.go` | — | complex | app |
+| WP2 | Phase 3 | `infra/lib/api-stack.ts` | WP1 | routine | cdk |
 
 ## Implementation Phases
 
@@ -129,7 +129,7 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
   - **Minimum size.** Every agent pays a fixed context cost before writing a line, so a package must be worth it: merge any package under ~5 steps or ~3 files into a neighbour it doesn't contend with, and keep any one wave to at most 4 packages.
   Do not manufacture parallelism. When contention or dependencies collapse everything into one slice, say so and emit a single package — a one-package plan is a legitimate outcome, and a split that forces two implementers into the same file is worse than no split.
 - **Write the Context Pack from what you already explored.** Its purpose is that implementers do not re-run your Glob/Grep/Read work; if a package needs a fact, put it there. Start each entry's bullet with `[shared]` or `[WP<n>]` as you write it — an entry two packages need is `[shared]`, never doubly tagged.
-- **When the plan meets the fan-out threshold (3+ packages, or 2+ tiered `complex`), also extract one slice file per package** to `.claude/temp/wp/WP<n>.md` (delete stale slices from a previous plan first). Extract with the shell — never re-type plan content with Write, which pays for the plan twice. Each slice holds the Summary, the Context Pack entries tagged `[shared]` plus those tagged with that package — not the whole pack — that package's Work Packages row, its phases, and its Edge Case Coverage rows. Run this once per package from the project root, `r` empty for a new plan or the round number in a fix round (the slice then carries only that round's phases):
+- **When the plan meets the fan-out threshold (3+ packages, or 2+ tiered `complex`), or mixes `app` and `cdk` packages, also extract one slice file per package** to `.claude/temp/wp/WP<n>.md` (delete stale slices from a previous plan first). Extract with the shell — never re-type plan content with Write, which pays for the plan twice. Each slice holds the Summary, the Context Pack entries tagged `[shared]` plus those tagged with that package — not the whole pack — that package's Work Packages row, its phases, and its Edge Case Coverage rows. Run this once per package from the project root, `r` empty for a new plan or the round number in a fix round (the slice then carries only that round's phases):
   ```
   mkdir -p .claude/temp/wp; w=WP1; r=; awk -v w="$w" -v r="$r" '
   /^## /{sec=$0; ph=0}
@@ -153,7 +153,7 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - **Every command in the Context Pack must carry its verdict in its exit code.** The caller's evidence is the `== <command> exit=<code>` line alone, so a command that reports failure only by printing would always read as a pass — write it wrapped so that it fails.
 - **Never design or write unit test cases/functions.** That is unit-test-implementer's exclusive job — your plan names *what* needs unit-level verification (Verification Targets), not the test cases themselves.
 - Adhere to the project's `.claude/CLAUDE.md` first, then the conventions file(s) named in your brief. Where both are silent, plan steps fall back to the same rules implementers fall back to: no comments unless the *why* is non-obvious, no scope beyond the request, validation only at system boundaries, no emojis.
-- End your result with a compact handback, so the caller dispatches from it without opening the file: the plan's file path (and slice paths), a 1-2 sentence summary of scope/phases, the Work Packages table reduced to Package / Depends On / Tier (in a fix round, only the packages that round touches), the `[shared]` full lint/build/test commands verbatim, the Verification Targets marked "unit" (one line each), and any open question or stage you're blocked on.
+- End your result with a compact handback, so the caller dispatches from it without opening the file: the plan's file path (and slice paths), a 1-2 sentence summary of scope/phases, the Work Packages table reduced to Package / Depends On / Tier / Owner (in a fix round, only the packages that round touches), the `[shared]` full lint/build/test commands verbatim, the Verification Targets marked "unit" (one line each), and any open question or stage you're blocked on.
 
 ## API Contracts
 
