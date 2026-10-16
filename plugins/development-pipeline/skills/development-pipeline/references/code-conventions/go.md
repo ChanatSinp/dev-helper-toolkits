@@ -67,7 +67,8 @@ Distinct from the acronym rule above: this is about how much of a *word* to keep
 - Format with `gofmt`; the formatter's output is not up for debate.
 - Doc comments start with the identifier's own name: `// Balance returns the current balance.`
 - Doc comments only where an exported identifier's purpose or contract is non-obvious from its name and signature; do not flag their absence otherwise.
-- Full sentences, ending with a period.
+- Doc comments: one line where possible, ending with a period.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.
 
 ## House rules that depart from upstream
 

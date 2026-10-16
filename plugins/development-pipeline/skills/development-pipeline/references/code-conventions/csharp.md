@@ -68,12 +68,22 @@ Use abbreviations only where widely accepted — the rule governs how to case th
 - Four spaces, no tabs. Allman braces (open and close each on their own line, aligned to the current indent).
 - One statement and one declaration per line; blank line between method and property definitions.
 - Parentheses to make expression clauses explicit; line breaks before binary operators.
-- `//` for brief explanations, on its own line, sentence-cased and ending with a period, one space after the delimiter. Avoid `/* */`.
-- XML doc comments only where a public member's purpose or contract is non-obvious from its name and signature; do not flag their absence otherwise.
+- `//` on its own line, one space after the delimiter. Avoid `/* */`.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.
+- Methods carry an XML doc comment that covers their parameters: a one-line `<summary>`, a `<param>` for every parameter (what it means, units, allowed range, or null handling — not its type), and `<returns>` when non-void. Same natural, short wording as other comments:
+  ```csharp
+  /// <summary>Charges the player's wallet for one spin.</summary>
+  /// <param name="playerID">Player to charge; must already have an open session.</param>
+  /// <param name="amount">Bet in minor units (cents); zero is rejected.</param>
+  /// <returns>Balance after the charge.</returns>
+  ```
+  Other members (properties, fields, types) get one only where their purpose is non-obvious from the name.
 
 ## House rules that depart from upstream
 
 - The `E` prefix on enums is a house rule; Microsoft uses no type prefix on enums. (The `I` prefix on interfaces is Microsoft's own convention.)
 - The acronym rule gives `Uid`/`Http`/`Json` where .NET writes `UUID`/`HTTP`/`JSON`.
 
-Apply both consistently. Everything else in this file follows Microsoft.
+- Every method documents its parameters with `<param>` tags; Microsoft recommends XML docs only for public APIs.
+
+Apply all three consistently. Everything else in this file follows Microsoft.

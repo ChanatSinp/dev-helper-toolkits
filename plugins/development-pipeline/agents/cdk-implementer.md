@@ -23,6 +23,7 @@ Your brief names the mode.
 ## Implementation Rules
 
 - **Match the project.** Use the CDK app's existing language, CDK major version (v2, `aws-cdk-lib`), construct style, and stack layout; read `cdk.json` for the app entry and context. For a new CDK app, use TypeScript unless the plan says otherwise. Follow the conventions file(s) your brief names.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.
 - **Trust the Context Pack.** Read only the files you edit plus what the pack does not cover.
 - **Write by absolute path**, built from the project root in your brief; never chain a write after an unchecked `cd`.
 - **Batch independent tool calls**; never batch two edits to the same file.

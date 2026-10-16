@@ -32,6 +32,7 @@ Your brief tells you which mode you are in. Read it before touching anything.
 - **Never write or design unit tests yourself.** If the plan includes a step that adds them, skip that step and report it as out of scope for you — that work belongs exclusively to unit-test-implementer (dispatch it separately, or tell the user or your caller to). Running the existing suite stays your job (After Implementation → Testing).
 - Edit existing files rather than creating new ones unless the plan explicitly requires new files.
 - Coding style (comments, error handling, naming): the project's `CLAUDE.md` files first, then the conventions file(s) named in your brief. Where both are silent, fall back to: no comments unless the *why* is non-obvious, no scope beyond the plan, validation only at system boundaries, no emojis.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler. Applies even where the project is silent; a project rule overrides it.
 - Execute each step of the plan in order. If a step is ambiguous, or you encounter a situation the plan does not cover, stop rather than improvising — return the question/blocker in your result for your caller to relay.
 - Return questions and uncertainty to the caller in your result.
 

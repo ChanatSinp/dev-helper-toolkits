@@ -53,6 +53,11 @@ The first segment of a `camelCase` or `_camelCase` identifier still starts lower
 - Use named exports.
 - Organize code by feature; collocate related code as closely as possible.
 
+## Layout and comments
+
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.
+- JSDoc/TSDoc only where an exported symbol's contract is non-obvious from its name and types; one line where possible.
+
 ## House rules that depart from upstream
 
 - The `I` prefix on interfaces and the `E` prefix on enums are house rules; the upstream guide uses bare PascalCase for both.
