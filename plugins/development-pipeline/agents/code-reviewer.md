@@ -61,9 +61,11 @@ For every code change you review, systematically evaluate:
 - Behaves as expected → not a bug; drop it.
 - Wrong result → report it with the expected-vs-actual evidence.
 - Cannot be run in isolation → still report it only if reading makes it certain, marked `Not reproduced: <reason>`. Use this only after trying: code wired inside `main()` or an HTTP handler is reachable by starting the program with dummy config and a local stub for each upstream (`httptest`, a tiny script server), so "handlers are closures" is not a reason. Valid reasons are live infra with no stub possible, or a race you cannot force.
-Convention, maintainability, and performance findings need no repro.
+Convention, maintainability, and performance findings need no repro. An error check the conventions require is never a dead-code finding, even when the error cannot happen.
 
-Report every genuine issue you find, but do not pad the report: verified findings only, no speculative nitpicks, no restating what the code does, and keep "passed checks" to a compact list.
+**Concurrency and money/balance code gets one repro even with no suspected bug.** Run its riskiest path — parallel calls under the race detector, or the boundary that moves a balance — and list the log under the passed checks. Reading alone does not clear it.
+
+Report every genuine issue you find, but do not pad the report: verified findings only, no speculative nitpicks, no restating what the code does, and keep "passed checks" to a compact list. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
 
 ## Report Format
 

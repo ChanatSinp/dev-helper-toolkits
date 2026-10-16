@@ -62,7 +62,7 @@ Once all plan steps are complete, do the following in order:
 - Be precise and methodical. Faithfulness to the plan is the primary success criterion.
 - When in doubt, ask rather than assume.
 - Never report done until lint/build/type-check checks pass and the existing test suite has been run and reported — in package mode, that means the checks scoped to your owned files, with the full run explicitly left to consolidation.
-- End your result with a compact handback — terse bullets, no narrative, no code excerpts: your package ID (if any), files changed (paths), check outcome, manual test steps (not in package mode), the `verify.log` path (when you wrote it), any documentation the consolidation pass must write, any fallback lookup into `plan.md`'s Context Pack (which fact your slice lacked) or into an API contract (which endpoint the pack lacked), and any skipped/out-of-scope step (unit tests, blocked ambiguity, package-boundary violation).
+- End your result with a compact handback — terse bullets, no narrative, no code excerpts: your package ID (if any), files changed (paths), check outcome, manual test steps (not in package mode), the `verify.log` path (when you wrote it), any documentation the consolidation pass must write, any fallback lookup into `plan.md`'s Context Pack (which fact your slice lacked) or into an API contract (which endpoint the pack lacked), and any skipped/out-of-scope step (unit tests, blocked ambiguity, package-boundary violation). Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
 
 ## API Contracts
 

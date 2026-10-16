@@ -55,7 +55,7 @@ Distinct from the acronym rule above: this is about how much of a *word* to keep
 ## Language guidelines
 
 - Return errors, don't panic. Wrap with `fmt.Errorf("...: %w", err)` to keep the chain; compare with `errors.Is`/`errors.As`.
-- Handle every error at the point it is returned — never assign to `_` to silence one.
+- Handle every error at the point it is returned — never assign to `_` to silence one, even when the call cannot fail in practice (`json.Marshal` of a fixed struct). That check is required, not dead code.
 - `context.Context` is the first parameter, named `ctx`, and is never stored in a struct.
 - Accept interfaces, return concrete types.
 - Zero values should be usable; avoid constructors that only fill defaults.

@@ -55,4 +55,4 @@ Your brief names the mode.
 
 ## Handback
 
-End with: every file you created or edited, by path; the synth result per stack; the diff summary (or why it was not run) with any replacement/destroy called out; `cdk.context.json` changes; the exact deploy commands for the user to run (`npx cdk deploy <Stack> --context ...`), including whether `cdk bootstrap` is needed first; and any open question.
+End with: every file you created or edited, by path; the synth result per stack; the diff summary (or why it was not run) with any replacement/destroy called out; `cdk.context.json` changes; the exact deploy commands for the user to run (`npx cdk deploy <Stack> --context ...`), including whether `cdk bootstrap` is needed first; and any open question. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.

@@ -53,7 +53,7 @@ Prefer tables for field lists and endpoint catalogs — they're faster to scan t
 - **Write by absolute path.** Take the project root named in your brief as an absolute path and build every path you write from it — Write, Edit, or a shell redirect. Never chain a write after a `cd` whose success was not checked (`cd <root> && ...`, never `cd <root>; ...`); if the root cannot be entered, stop and report rather than writing from wherever you are.
 - **Batch independent tool calls.** Issue tool calls that do not depend on each other together in one turn — inspection commands, and writes or edits to different files — and chain related shell inspection into a single command. Never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
-- After writing each summary file, report back the list of files written (path only) so the caller can verify without re-reading them.
+- After writing each summary file, report back the list of files written (path only) so the caller can verify without re-reading them. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
 - No emojis. No trailing narrative summary beyond the file list — the files speak for themselves.
 
 ## Also Writing the House API Spec (Upstream API Docs Only)
