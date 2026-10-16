@@ -1,6 +1,6 @@
 # Fix rounds
 
-Read before acting on a code-review finding the user selected, a failing `verify.log`, or a failing technical-test case in `test-results.md`. Part of the orchestrator rules in `SKILL.md`. The sensitive areas named below are auth, money/balance, persistence-schema, and concurrency code. A fix round whose files span both `app` and `cdk` owners is never direct: it is planned, and in a mixed plan runs through `references/fan-out.md` with its consolidation pass, whatever the package count.
+Read before acting on a code-review finding the user selected, a failing `verify.log`, or a failing technical-test case in `test-results.md`. Part of the orchestrator rules in `SKILL.md`. The sensitive areas named below are auth, money/balance, persistence-schema, and concurrency code. A fix round whose files span both `app` and `cdk` owners is never direct. In a plan mixing `app` and `cdk`, every planned fix round runs through `references/fan-out.md` with its consolidation pass, whatever the package count.
 
 ## Routing selected review findings
 

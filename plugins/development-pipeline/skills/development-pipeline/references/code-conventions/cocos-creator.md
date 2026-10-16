@@ -13,3 +13,7 @@
 
 - Nodes: `PascalCase`
 - Scenes: `PascalCase`
+
+## Layout and comments
+
+- Follows `javascript-typescript.md`; this file adds only the engine-specific rules above.

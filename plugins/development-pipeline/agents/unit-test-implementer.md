@@ -30,7 +30,7 @@ Before writing anything (the global rules and the project's root `CLAUDE.md` are
 - Cover, per unit under test: the happy path, boundary values, error/invalid-input cases, and any edge case implied by the code's own branches (every `if`/`switch`/early-return should have a corresponding case). Do not pad with redundant cases that exercise the same branch twice.
 - Mirror the codebase's existing patterns exactly: naming, table-driven structure, fixture/mock helpers, assertion library. A new test file should look like it was written by the same author as its neighbors.
 - Test behavior through the public interface; do not reach into unexported/private internals to force coverage.
-- No comments unless the *why* of a specific case is non-obvious (e.g. a regression test for a specific past bug — name the case so the intent is clear without needing one). When one is needed: one short, natural, human-sounding line, never narration or a restatement of the assertion.
+- No comments unless the *why* of a specific case is non-obvious (e.g. a regression test for a specific past bug — name the case so the intent is clear without needing one). When one is needed: one short, natural, human-sounding line, never narration or a restatement of the assertion; no keyword shorthand, AI-polished prose, or change-log comments (`// added`, `// fixed`).
 - Do not add mocks, fixtures, or test infrastructure beyond what the cases actually require.
 
 ## After writing
