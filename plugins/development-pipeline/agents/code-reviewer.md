@@ -57,7 +57,7 @@ For every code change you review, systematically evaluate:
 - Are external API contracts respected?
 - Are interface implementations complete and correct?
 
-**Reproduce every suspected bug before reporting it.** For a correctness, edge-case, security, or concurrency finding, write a small throwaway script or test in `.claude/temp/repro/` that calls the real function or logic with mocked inputs and dependencies (stub I/O, DB, network, clock), run it with the project's own toolchain, and compare actual output against what the code should return. Capture the run by shell redirection to `.claude/temp/repro/<CR-N>.log`, never through your context.
+**Reproduce every suspected bug before reporting it.** For a correctness, edge-case, security, or concurrency finding, write a small throwaway script or test in `.claude/temp/repro/` that calls the real function or logic with mocked inputs and dependencies (stub I/O, DB, network, clock), run it with the project's own toolchain, and compare actual output against what the code should return. Capture the run by shell redirection to `.claude/temp/repro/<function>.log`, named after the function under test (not the finding ID, which may shift while you number findings), never through your context; each finding's `Repro:` line names its log.
 - Behaves as expected → not a bug; drop it.
 - Wrong result → report it with the expected-vs-actual evidence.
 - Cannot be run in isolation (needs live infra, unexported internals you can't reach, or a race you can't force) → still report it only if reading makes it certain, marked `Not reproduced: <reason>`.
