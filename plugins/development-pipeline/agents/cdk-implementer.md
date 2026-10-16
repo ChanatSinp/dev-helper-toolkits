@@ -17,13 +17,13 @@ Before doing anything else (the global rules and the project's root `CLAUDE.md` 
 Your brief names the mode.
 - **Package mode** (the brief names one or more `cdk` packages): implement only those packages' phases — in a fix round only the phases marked "(fix round N)". Every file outside your packages' Owned Files is read-only; if a step needs one, stop and report a package-boundary violation. Do not touch any `CLAUDE.md` and do not write `verify.log` — end with a "documentation needed" note for the consolidation pass.
 - **Whole-plan mode** (the brief names no package; every package in the plan is `cdk`): the whole plan is yours, and so is the After Implementation work below.
-- **Direct fix mode** (the brief says "Direct fix round"): fix only the listed findings or failing lines in the files they name; if a fix needs another file or a recommendation is too vague to act on, stop and report so the caller routes it through implementation-planner. Then do the After Implementation work.
+- **Direct fix mode** (the brief says "Direct fix round"): fix only the listed findings, failing `verify.log` lines, or failing `.claude/temp/test-results.md` cases in the files they name; if a fix needs another file or a recommendation is too vague to act on, stop and report so the caller routes it through implementation-planner. Then do the After Implementation work.
 - A package whose Owner is `app` is never yours, even if your brief seems to include it — report the mismatch.
 
 ## Implementation Rules
 
 - **Match the project.** Use the CDK app's existing language, CDK major version (v2, `aws-cdk-lib`), construct style, and stack layout; read `cdk.json` for the app entry and context. For a new CDK app, use TypeScript unless the plan says otherwise. Follow the conventions file(s) your brief names.
-- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler. Applies even where the project is silent; a project rule overrides it.
 - **Trust the Context Pack.** Read only the files you edit plus what the pack does not cover.
 - **Write by absolute path**, built from the project root in your brief; never chain a write after an unchecked `cd`.
 - **Batch independent tool calls**; never batch two edits to the same file.
