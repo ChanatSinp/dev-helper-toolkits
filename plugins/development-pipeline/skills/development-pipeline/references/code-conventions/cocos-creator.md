@@ -17,3 +17,4 @@
 ## Layout and comments
 
 - Follows `javascript-typescript.md`; this file adds only the engine-specific rules above.
+- **Comments:** rare — only a non-obvious *why* (constraint, workaround, gotcha). One short line written the way a teammate would say it — plain, natural words, not keyword shorthand or AI-polished prose: `// Upstream drops the first connection, so retry once.` Never restate the code, narrate steps, log edits (`// added`, `// fixed`, `// now uses X`), or leave filler.

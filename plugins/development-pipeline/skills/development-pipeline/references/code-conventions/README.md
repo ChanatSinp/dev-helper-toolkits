@@ -9,6 +9,6 @@ One file per language or framework. Each is self-contained: a brief points at th
 | `csharp.md` | C# |
 | `go.md` | Go |
 
-Every file follows the same shape: scope and upstream reference, precedence, naming (table, then the prefix/acronym expansions), language guidelines, layout and comments, and a closing list of the house rules that depart from upstream.
+Every file except an add-on that pairs with another (`cocos-creator.md`, which keeps its own naming table and the shared comment rule) follows the same shape: scope and upstream reference, precedence, naming (table, then the prefix/acronym expansions), language guidelines, layout and comments, and a closing list of the house rules that depart from upstream.
 
 Adding a stack: copy that shape, name the upstream style guide it follows, and register the file in the table above; briefs point at the matching file(s) directly, so the table is how the orchestrator picks them.
