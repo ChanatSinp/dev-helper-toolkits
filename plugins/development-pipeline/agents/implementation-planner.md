@@ -86,7 +86,7 @@ Write a new plan to `.claude/temp/plan.md` using this structure:
 - [WP1] Contracts: the exact API/schema excerpt the package needs (copied, not "see api-specs.md")
 - [shared] Conventions: a project-specific rule that applies (naming, error style, file layout)
 - [WP1] Commands: the package's compile/type-check command
-- [shared] Commands: the full lint/build/test commands — each must exit non-zero when its check fails, so wrap a check that only prints: `test -z "$(gofmt -l .)"`, never bare `gofmt -l .`
+- [shared] Commands: the full lint/build/test commands — each must exit non-zero when its check fails, so wrap a check that only prints: `test -z "$(gofmt -l cmd internal)"`, never bare `gofmt -l`; scope a whole-tree check (formatter, linter) to the project's source dirs, never `.`, which also scans the reviewer's scratch scripts under `.claude/temp/`
 
 ## Work Packages
 [The fan-out map. Every phase below belongs to exactly one package; every file the File map marks as created or modified is owned by exactly one package. Emit a single package (`WP1`, depends on nothing) when the work genuinely cannot be split — that is a valid plan, not a failure. Tier: `routine` = mechanical edits fully specified by the steps; `complex` = non-trivial logic, concurrency, security, or judgement calls. Owner: `cdk` for AWS CDK infrastructure code (stacks, constructs, CDK app entry, `cdk.json`), executed by cdk-implementer; `app` for everything else. Never mix the two in one package; a `cdk` package's Commands entry is its `cdk synth`, and the `[shared]` commands include `cdk synth` too.]
