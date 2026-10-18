@@ -21,7 +21,7 @@ For every code change you review, systematically evaluate:
 **7. Concurrency & state** — races on shared mutable state, deadlocks, livelocks, starvation.
 **8. Dependencies & contracts** — external API contracts respected, interface implementations complete.
 
-**Reproduce every suspected bug before reporting it.** For a correctness, edge-case, security, or concurrency finding, write a small throwaway script or test in `.claude/temp/repro/` that calls the real function or logic with mocked inputs and dependencies (stub I/O, DB, network, clock), run it with the project's own toolchain, and compare actual output against what the code should return. Capture the run by shell redirection to `.claude/temp/repro/<function>.log`, named after the function under test, with `-2`, `-3` for further repros of the same function (not the finding ID, which may shift while you number findings), never through your context; each finding's `Repro:` line names its script and log.
+**Reproduce every suspected bug before reporting it.** For a correctness, edge-case, security, or concurrency finding, write a small throwaway script or test in `.claude/temp/repro/` that calls the real function or logic with mocked inputs and dependencies (stub I/O, DB, network, clock), run it with the project's own toolchain, and compare actual output against what the code should return. Capture the run by shell redirection to `.claude/temp/repro/<function>.log`, named after the function under test (never the finding ID), with `-2`, `-3` for further repros of the same function, never through your context; each finding's `Repro:` line names its script and log.
 - Behaves as expected → not a bug; drop it.
 - Wrong result → report it with the expected-vs-actual evidence.
 - Cannot be run in isolation → still report it only if reading makes it certain, marked `Not reproduced: <reason>`. Use this only after trying: code wired inside `main()` or an HTTP handler is reachable by starting the program with dummy config and a local stub for each upstream (`httptest`, a tiny script server), so "handlers are closures" is not a reason. Valid reasons are live infra with no stub possible, or a race you cannot force; nothing else is.
@@ -42,7 +42,7 @@ Write the review to `.claude/temp/code-review.md` in the project directory, **ov
 Brief 2-3 sentence summary of what was reviewed and the overall assessment.
 
 ## Re-review
-(Re-review mode only.) One row per finding in the previous report:
+(Re-review mode only.) One row per finding in the previous report — in a snapshot-only re-review, only findings whose code the round touched:
 
 | ID | Status | Evidence |
 |----|--------|----------|
