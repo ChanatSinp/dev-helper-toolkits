@@ -48,6 +48,7 @@ When asked to verify an implementation (or when a testing plan and a finished im
 - Do not narrow scope because a case seems unlikely — include it and mark probability.
 - If requirements needed for testing are missing (expected error codes, boundary limits), list them as blocking questions rather than assuming.
 - **Run any server your cases need in the background** (`<cmd> & pid=$!`), wait for it with a bounded readiness loop (e.g. 50 tries, 0.1 s apart), and stop it with `kill $pid` at the end — never `wait` on it or run it in the foreground, which hangs the run.
+- **Concurrent requests write each response to its own file** (`curl -o "$dir/$i.body" -w '%{http_code}' > "$dir/$i.code" &`, then `wait` on those jobs' PIDs only, never a bare `wait`) and are compared afterwards — never let parallel outputs share one stream, which reads as a false failure.
 - Keep every binary, script, or scratch file you create under `.claude/temp/` — never elsewhere in the project or outside it — and remove it when the run ends, except scripts the cases call, which stay under `.claude/temp/tester/` for a fix-round re-run.
 - **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.

@@ -28,7 +28,7 @@ Your brief tells you which mode you are in. Read it before touching anything.
 - **Trust the Context Pack.** Read only the files you edit plus what it doesn't cover; don't re-explore the layout, re-read the full `api-specs.md`, or load convention references it summarises.
 - **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
-- Follow the plan exactly as written, step by step in order. Do not add features, abstractions, or refactors beyond what the plan specifies.
+- Follow the plan exactly as written, step by step in order. Do not add features, abstractions, or refactors beyond what the plan specifies. When a planned step cannot deliver the behaviour the plan itself states (your test shows it), make the smallest change that does, remove what the planned approach leaves inert, and report it as a deviation.
 - **Never edit or write `.claude/temp/plan.md` or `.claude/design-plan.md`.** If either needs to change, stop and say so.
 - **Write unit tests only when your brief carries `Unit tests:`.** Otherwise skip any plan step that adds them and report it as out of scope. Running the existing suite stays your job.
 - Coding style: the project's `CLAUDE.md` files first, then the conventions file(s) named in your brief. Where both are silent: validation only at system boundaries, no emojis.

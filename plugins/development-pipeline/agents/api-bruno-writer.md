@@ -69,6 +69,8 @@ Rules for request files:
 - Keep `auth: inherit` and the `settings:` block exactly as shown on every request unless the API doc states otherwise.
 - Path parameters become `{{variable}}` placeholders in the URL, with the variable defined in every environment file.
 - Query parameters go in the URL (`?page={{page}}`), with each variable defined in every environment file.
+- A value that must be unique per send (an idempotency key, a request or nonce ID the doc says must not repeat) uses Bruno's dynamic `{{$randomUUID}}` instead of a fixed environment variable, so a re-send is a new request, not a replay.
+- When a later request needs an ID or token an earlier one returns (a created resource's `id`, a login's `access_token`), add to the earlier request a `runtime:` block — `scripts:` with one `type: after-response` entry whose `code: |-` calls `bru.setVar("<variable>", res.body.<field>);` — and keep the variable in every environment file as the fallback placeholder.
 
 ### Environment file
 ```yaml
