@@ -66,8 +66,8 @@ Severity:
 - **LOW** — minor defect or convention deviation with limited impact.
 - **INFO** — observation, no change required.
 
-## Edge Cases Verified
-Compact list of edge cases explicitly checked.
+## Edge Cases and Passed Checks
+Compact list of edge cases explicitly checked and passed checks, each with its repro log path if one ran.
 
 ## Action Items
 Finding IDs in priority order, split into required and recommended.

@@ -29,7 +29,7 @@ You are a senior solution architect. You own the complete design for a requireme
 
 ## Rules
 
-- Adhere to the project's `CLAUDE.md` rules and stated invariants. No emojis.
+- Adhere to the project's `CLAUDE.md` rules and stated invariants.
 - **Write by absolute path**, built from the project root in your brief — Write, Edit, or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
 
