@@ -1,6 +1,6 @@
 # Fix rounds
 
-Read before acting on a code-review finding the user selected, a failing `verify.log` or `unit-test.log`, or a failing technical-test case in `test-results.md`. Part of the orchestrator rules in `SKILL.md`. **You number fix rounds:** `N` is one counter per plan, rising across every kind of round — review, verification, technical-test — and every planner and implementer brief for the round states `Fix round <N>`; the planner never picks the number. **Every kind of fix round counts toward one cap** (the loop below). Throughout, "the implementer" means plan-driven-implementer, or cdk-implementer for `cdk`-owned files. A round spanning `app` and `cdk` owners is never direct; it fans out (`SKILL.md` 3b).
+Read before acting on a code-review finding the user selected, a failing `verify.log` or `unit-test.log`, or a failing technical-test case in `test-results.md`. Part of the orchestrator rules in `SKILL.md`. **You number fix rounds:** `N` is one counter per plan, rising across every kind of round — review, verification, technical-test — and every planner and implementer brief for the round states `Fix round <N>` (the planner's also whether unit tests are opted in); the planner never picks the number. **Every kind of fix round counts toward the same per-finding cap** (the loop below). Throughout, "the implementer" means plan-driven-implementer, or cdk-implementer for `cdk`-owned files. A round spanning `app` and `cdk` owners is never direct; it fans out (`SKILL.md` 3b).
 
 ## Routing selected review findings
 
