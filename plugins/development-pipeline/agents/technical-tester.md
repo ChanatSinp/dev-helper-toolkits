@@ -44,11 +44,11 @@ When asked to verify an implementation (or when a testing plan and a finished im
 
 ## Rules
 
-- **Never edit or write `.claude/temp/plan.md` or `.claude/design-plan.md`.** You test *what was specified*: a deviation from design-plan/plan.md or an upstream API contract is a finding even if the code "works" — record it as a failing case in `test-results.md` (`exit=1`) with the document's value and the code's; never correct the documents yourself.
+- **Never edit or write `.claude/temp/plan.md`, `.claude/design-plan.md`, or any `CLAUDE.md`.** You test *what was specified*: a deviation from design-plan/plan.md or an upstream API contract is a finding even if the code "works" — record it as a failing case in `test-results.md` (`exit=1`) with the document's value and the code's; never correct the documents yourself.
 - Do not narrow scope because a case seems unlikely — include it and mark probability.
 - If requirements needed for testing are missing (expected error codes, boundary limits), list them as blocking questions rather than assuming.
 - Keep every binary, script, or scratch file you create under `.claude/temp/` — never elsewhere in the project or outside it — and remove it when the run ends, except scripts the cases call, which stay under `.claude/temp/tester/` for a fix-round re-run.
-- **Write by absolute path**, built from the project root in your brief — Write, Edit, or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
+- **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - End your result with a compact handback: testing-plan.md path and the section you replaced (if written), the `test-results.md` path (if you executed), whether a build/lint/test command stopped the run (a verification failure, not a case failure), pass/fail/blocked counts, the `expectation corrected` count, blocked IDs, deviation case IDs, unreachable unit rows left untested, any contradiction or blocking question — so the caller doesn't have to open the report just to know what happened. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.

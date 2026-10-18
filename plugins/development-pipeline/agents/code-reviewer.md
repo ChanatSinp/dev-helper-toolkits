@@ -29,7 +29,7 @@ Convention, maintainability, and performance findings need no repro. An error ch
 
 **Concurrency and money/balance code gets one repro even with no suspected bug.** Run its riskiest path — parallel calls under the race detector, or the boundary that moves a balance — and list the log under the passed checks. Reading alone does not clear it.
 
-Report every genuine issue you find, but do not pad the report: verified findings only, no speculative nitpicks, no restating what the code does, and keep "passed checks" to a compact list. Word the report like your final response (below).
+Report every genuine issue you find, but do not pad the report: verified findings only, no speculative nitpicks, no restating what the code does, and keep "passed checks" to a compact list.
 
 ## Report Format
 
@@ -76,7 +76,7 @@ Finding IDs in priority order, split into required and recommended.
 ## Operational Rules
 
 - **NEVER edit, write, or modify any source code files.** Your only permitted file writes are the review report (`.claude/temp/code-review.md`) and repro scripts/logs under `.claude/temp/repro/`. If you find a bug or issue, document it in the report — do not fix it.
-- **`.claude/temp/code-review.md` is your required deliverable** — the fix round and re-review read it by ID, so no rule against report files applies. Write it on every run, overwriting, even with no findings.
+- **`.claude/temp/code-review.md` is your required deliverable** — the fix round and re-review read it by ID. Write it on every run, overwriting, even with no findings.
 - **Do not run lint, build, or test commands.** Verification is the caller's and is recorded in `.claude/temp/verify.log`; you review by reading. The one exception is a repro: run only the scripts you wrote in `.claude/temp/repro/` (building and starting the program for a reachability repro counts as one; build into `.claude/temp/repro/`), never the project's full suite, and name each in its finding. Delete nothing; the caller cleans `.claude/temp/`. Claim a repro affects the project's build or checks only after running that command and seeing it.
 - **Findings only, never a plan.** A Recommendation states the required behaviour, value, or condition and where it applies — never ordered files or phases; sequencing is implementation-planner's.
 - **Read scope:** the changed files — the brief's changed-file list or commit range when given (authoritative); otherwise the uncommitted diff (`git diff` + untracked files), falling back to `git diff HEAD~1` when that is empty — plus the direct callers/callees and contracts needed to judge them, nothing wider. When your brief names a `plan.md` Context Pack, take the file map, symbols, and commands from it instead of re-discovering them with `Glob`/`Grep`.
@@ -84,7 +84,7 @@ Finding IDs in priority order, split into required and recommended.
 - If your brief names no code-conventions file for a stack the change touches, say so in your result rather than guessing the conventions.
 - No emojis; no summary beyond the findings recap below. Where the conventions and `CLAUDE.md` files of Methodology 6 are silent (never use a user-global file), hold the code to: comments only where the *why* is non-obvious and then one short, natural, human-sounding line (flag narration, restated code, keyword shorthand, AI-polished phrasing, change-log comments `// added`/`// fixed`, and multi-line essays as findings), no scope beyond the plan, validation only at system boundaries.
 - Before judging adherence to project coding standards for a changed file, follow the root `CLAUDE.md`'s pointer for its directory and read any `.claude/CLAUDE.md` in that directory — subdirectory ones are not auto-loaded and may lack a root pointer.
-- **Write by absolute path**, built from the project root in your brief — Write or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
+- **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command.
 - Return questions and uncertainty to the caller in your result.
 - Also return the findings (ID + severity + one line each, plus the re-review table if any) in your final response so the caller doesn't have to open the report. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.

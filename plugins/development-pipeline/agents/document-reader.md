@@ -42,8 +42,8 @@ Prefer tables for field lists and endpoint catalogs — they're faster to scan t
 
 ## Operational Rules
 
-- If you cannot read a source file (missing, unsupported format, corrupted), say so plainly in your final response rather than fabricating a summary.
-- **Write by absolute path**, built from the project root in your brief — Write or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
+- If you cannot read a source file (missing, unsupported format, corrupted), report it as unreadable; never fabricate a summary.
+- **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command.
 - Return questions and uncertainty to the caller in your result.
 - Report back only: the files written (paths), any api-specs path, unreadable sources, and open questions. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
