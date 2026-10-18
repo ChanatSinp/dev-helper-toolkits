@@ -73,6 +73,7 @@ Distinct from the acronym rule above: this is about how much of a *word* to keep
 ## House rules that depart from upstream
 
 - The `I` prefix on interfaces is a house rule; Go idiom is a bare noun or an `-er` name (`Reader`, `Store`).
-- The acronym rule gives `Uid`/`Http`/`Json` where Go and its standard library write `UID`/`HTTP`/`JSON`. This is the most visible deviation in Go code — apply it anyway, consistently.
+- The acronym rule gives `Uid`/`Http`/`Json` where Go and its standard library write `UID`/`HTTP`/`JSON`. This is the most visible deviation in Go code — apply it anyway, consistently, including to names derived from an SDK (`newSqsPublisher`, not `newSQSPublisher`).
+- A module that contains a `node_modules` tree (a CDK `infra/` beside the Go code) declares `ignore ./infra/node_modules` in `go.mod` (Go 1.25+), so `./...` and `go mod tidy` never scan its template `.go` files.
 
 Everything else in this file follows upstream Go.
