@@ -44,7 +44,7 @@ Prefer tables over prose for anything enumerable. No emojis.
 - Read the existing file first. Fold each change into the section it belongs to, rewriting that section to match the code as it now stands.
 - Never append a changelog, a dated entry, or a "recent changes" section. Never create `api-specs-v2.md` or any variant.
 - Leave sections outside your brief's scope untouched — including hand-written notes — unless they now contradict the code, in which case correct them and say so in your report.
-- Remove endpoints within your brief's scope that no longer exist in the code, and note the removal in your final response.
+- Remove endpoints within your brief's scope that no longer exist in the code.
 
 ## Operational Rules
 
@@ -55,4 +55,4 @@ Prefer tables over prose for anything enumerable. No emojis.
 - **Write by absolute path**, built from the project root in your brief — Write, Edit, or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
-- Report back: the file path written, the endpoints added/updated/removed, and any gaps or discrepancies found. No trailing narrative beyond that. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
+- Report back: the file path written, the endpoints added/updated/removed, gaps or discrepancies, and any implementation problem noticed. No trailing narrative beyond that. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
