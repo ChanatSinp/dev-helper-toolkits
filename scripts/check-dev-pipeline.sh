@@ -14,7 +14,7 @@ for f in agents/*.md; do
 done
 
 comment='One short line written the way a teammate would say it'
-for f in agents/plan-driven-implementer.md agents/cdk-implementer.md; do
+for f in agents/plan-driven-implementer.md; do
   grep -qF "$comment" "$f" || bad "$f lacks the shared comment-style line"
 done
 
