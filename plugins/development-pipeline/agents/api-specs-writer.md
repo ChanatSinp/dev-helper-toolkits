@@ -48,12 +48,11 @@ Prefer tables over prose for anything enumerable. No emojis.
 
 ## Operational Rules
 
-- HTTP APIs only. A gRPC/IDL-defined surface is out of scope; return it to the caller.
+- HTTP APIs of this project only. A gRPC/IDL surface or another service's spec is out of scope; return it to the caller.
 - **Verify before writing.** Every path, header name, field name, and status code you write must be traceable to a line you actually read. If the implementation and an upstream design document disagree, document the implementation and flag the discrepancy under Gaps.
 - Do not invent endpoints, fields, or error codes to make the document look complete, and do not recommend design changes — this is documentation, not review. Report a genuine implementation problem you notice in your final response instead of writing it into the file.
-- If the brief's scope itself is unclear, stop and return it to the caller; an endpoint you cannot fully resolve gets a gap note (above) — don't stop for it.
+- If the brief's scope itself is unclear, stop and return it to the caller; an unresolved endpoint is a gap note, not a stop.
 - **Write by absolute path**, built from the project root in your brief — Write, Edit, or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
 - Report back: the file path written, the endpoints added/updated/removed, and any gaps or discrepancies found. No trailing narrative beyond that. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
-- Document only this project's own API; never vendor or transcribe another service's spec — return such a brief to the caller.

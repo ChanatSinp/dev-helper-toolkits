@@ -26,7 +26,6 @@ Before writing anything (the global rules and the project's root `CLAUDE.md` are
 
 ## Writing tests
 
-- Derive every expected output from the code (Inputs 2).
 - One test function/group per implementation function, named and ordered to mirror the implementation file's own function order — a reader scanning the test file top-to-bottom should be able to match each block to its counterpart in the implementation without searching.
 - Cover, per unit under test: the happy path, boundary values, error/invalid-input cases, and any edge case implied by the code's own branches (every `if`/`switch`/early-return should have a corresponding case). Do not pad with redundant cases that exercise the same branch twice.
 - Mirror the codebase's existing patterns exactly: naming, table-driven structure, fixture/mock helpers, assertion library. A new test file should look like it was written by the same author as its neighbors.
@@ -36,13 +35,13 @@ Before writing anything (the global rules and the project's root `CLAUDE.md` are
 
 ## After writing
 
-1. Run the tests you wrote (and the surrounding suite for the touched package/module) before reporting anything. Run any other check only as your brief or the plan's `[shared] Commands` entry (found by grep) writes it — never a lint or format command of your own. Capture that run in `.claude/temp/unit-test.log` by shell redirection: truncate the file first (`mkdir -p <root>/.claude/temp && : > <root>/.claude/temp/unit-test.log`, where `<root>` is the absolute project root from your brief), then run each command as `<command> >> <root>/.claude/temp/unit-test.log 2>&1; echo "== <command> exit=$?" >> <root>/.claude/temp/unit-test.log` (the `verify.log` format). Never print the output, pipe it through `tee`, or write it with Write. Write each command literally on its own line — never loop over command strings held in a variable. A marker line is exactly `== <command> exit=<code>`, with nothing after the code. Afterwards grep the `== ` lines; open the log only for a non-zero exit, and then only its tail or the failing lines. The caller greps the same lines as its evidence, so never omit one and never trim the file. On a fix-round continuation, re-run every package your earlier run covered, not only the newly touched one.
-2. Report failures explicitly; change an expectation only once it, not the code, is shown wrong.
+1. Run the tests you wrote (and the surrounding suite for the touched package/module) before reporting anything. Run any other check only as your brief or the plan's `[shared] Commands` entry (found by grep) writes it — never a lint or format command of your own. Capture that run in `.claude/temp/unit-test.log` by shell redirection: truncate the file first (`mkdir -p <root>/.claude/temp && : > <root>/.claude/temp/unit-test.log`, where `<root>` is the absolute project root from your brief), then run each command as `<command> >> <root>/.claude/temp/unit-test.log 2>&1; echo "== <command> exit=$?" >> <root>/.claude/temp/unit-test.log` (the `verify.log` format). Never print the output, pipe it through `tee`, or write it with Write. Write each command literally on its own line — never loop over command strings held in a variable. A marker line is exactly `== <command> exit=<code>`, with nothing after the code. Afterwards grep the `== ` lines; open the log only for a non-zero exit, and then only its tail or the failing lines. The caller greps the same lines as its evidence, so never omit one and never trim the file. On any fix-round run (continued or fresh), re-run every package an earlier unit-test.log covered, not only the newly touched one; read its `== ` lines before truncating.
+2. Report failures explicitly.
 3. Summarize what's covered and, if you deliberately left a case out (e.g. untestable without a seam change), say so rather than silently omitting it.
 
 ## Rules
 
-- **Never edit or write `.claude/temp/plan.md` or `.claude/design-plan.md`.** They are read-only inputs owned by implementation-planner and solution-architect respectively.
+- **Never edit or write `.claude/temp/plan.md` or `.claude/design-plan.md`.**
 - If the target code has no clear seam to unit test (e.g. tightly coupled to I/O with no interface), stop and report the testability gap with options rather than writing a shallow/integration-style test and calling it a unit test.
 - Keep every binary, script, or scratch file you create under `.claude/temp/` — never elsewhere in the project or outside it — and remove it when the run ends.
 - **Write by absolute path**, built from the project root in your brief — Write, Edit, or shell redirect; never chain a write after an unchecked `cd` (`cd <root> && ...`); if the root cannot be entered, stop and report.
