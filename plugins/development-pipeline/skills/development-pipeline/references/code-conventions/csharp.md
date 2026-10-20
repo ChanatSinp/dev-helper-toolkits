@@ -17,7 +17,7 @@
 | Private/internal static fields | `s_camelCase`; `[ThreadStatic]` uses `t_camelCase` |
 | Constants (fields and locals, any access modifier) | `PascalCase` |
 | Method parameters, local variables | `camelCase` |
-| Booleans (any scope) | `is`/`has` prefix — `IsValid`, `hasPayload` |
+| Booleans (any scope) | `is`/`has`/`can`/`should` prefix — `IsValid`, `hasPayload`, `CanRetry`, `shouldFlush` |
 | Callbacks | follow the member's own casing — `PascalCase` public, `_camelCase` private/internal |
 | Event callbacks | `On*` prefix — `OnOrderPlaced`; `_on*` when private/internal |
 | Handlers | `*Handler` suffix — `SubmitHandler`, `_errorHandler` |
@@ -25,10 +25,12 @@
 | Primary constructor parameters — `record` | `PascalCase` (they become public properties) |
 | Generic type parameters | `T`, or descriptive `TPascalCase` (`TSession`) |
 | Attribute types | suffix `Attribute` |
+| Async methods (return `Task`/`ValueTask`) | suffix `Async` — `LoadPlayerAsync` |
+| Exception types | suffix `Exception` — `InsufficientFundsException` |
+| Event-args types | suffix `EventArgs` — `OrderPlacedEventArgs` |
 
 - No two consecutive underscores — those names are reserved for the compiler.
 - Namespaces use reverse domain name notation.
-- Avoid single-letter names outside loop counters; prefer clarity over brevity.
 
 ### Prefixed types
 
@@ -48,6 +50,16 @@ Applies inside any identifier, whatever its casing:
 The first segment of a `camelCase` or `_camelCase` identifier still starts lowercase, so a leading acronym is lowercased: `id`, `_id`, `uid`, `httpClient`. The rule applies from the second segment onward.
 
 Use abbreviations only where widely accepted — the rule governs how to case the ones you keep, not a licence to invent them.
+
+### Name length
+
+Distinct from the acronym rule above: this is about how much of a *word* to keep. A short name is good when it still carries the full meaning; a longer name is better when the short one would leave the reader guessing. Judge by how far the reader is from the declaration:
+
+- A name whose declaration is one or two lines away can be short: `i` for a loop index, `e` for an event in a one-line handler, `ctx`, `err`, `idx`.
+- The wider the scope, the more the name has to carry. A public member, a field, or a value used dozens of lines below its declaration gets full words — `RetryDelayMs`, not `Rd`.
+- Never shorten to the point of ambiguity. `cnt` could be count or counter; `res` could be response, result, or resource; `val` says nothing about what the value is. If a reader has to scroll back to learn what a name means, the name is too short.
+- Prefer dropping redundancy over truncating words: on a `Wallet` class, the property is `Balance`, not `WalletBalance` and not `WltBal`.
+- Functions name what they do with a verb: `LoadPlayerProfile`, not `Lpp` or `DoProfile`.
 
 ## Language guidelines
 

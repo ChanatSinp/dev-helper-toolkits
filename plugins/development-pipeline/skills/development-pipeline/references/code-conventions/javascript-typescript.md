@@ -10,6 +10,8 @@
 |---|---|
 | Classes | `PascalCase` |
 | Types | `PascalCase` |
+| Generic type parameters | `T`, or descriptive `TPascalCase` (`TSession`) |
+| Error classes | suffix `Error` — `ValidationError` |
 | Interfaces | `IPascalCase` (prefix `I`) — see *Prefixed types* |
 | Enums | `EPascalCase` (prefix `E`) — see *Prefixed types* |
 | Public functions/methods | `camelCase` |
@@ -17,7 +19,7 @@
 | Lifecycle methods | `camelCase` (framework default) |
 | Local/public variables | `camelCase` |
 | Private/protected variables | `_camelCase` |
-| Booleans (any scope) | `is`/`has` prefix — `isReady`, `hasPayload` |
+| Booleans (any scope) | `is`/`has`/`can`/`should` prefix — `isReady`, `hasPayload`, `canRetry`, `shouldFlush` |
 | Constants | `UPPER_SNAKE_CASE` |
 | Local/public callbacks | `camelCase` |
 | Private/protected callbacks | `_camelCase` |
@@ -41,6 +43,16 @@ Applies inside any identifier, whatever its casing:
 - 3 characters or more → PascalCase, never all-caps: `Uid`, `Http`, `Json` — `userUid`, `parseJson`, `HttpClient`.
 
 The first segment of a `camelCase` or `_camelCase` identifier still starts lowercase, so a leading acronym is lowercased: `id`, `_id`, `uid`, `httpClient`. The rule applies from the second segment onward.
+
+### Name length
+
+Distinct from the acronym rule above: this is about how much of a *word* to keep. A short name is good when it still carries the full meaning; a longer name is better when the short one would leave the reader guessing. Judge by how far the reader is from the declaration:
+
+- A name whose declaration is one or two lines away can be short: `i` for a loop index, `e` for an event in a one-line handler, `ctx`, `err`, `idx`.
+- The wider the scope, the more the name has to carry. An exported symbol, a class member, or a value used dozens of lines below its declaration gets full words — `retryDelayMs`, not `rd`.
+- Never shorten to the point of ambiguity. `cnt` could be count or counter; `res` could be response, result, or resource; `val` says nothing about what the value is. If a reader has to scroll back to learn what a name means, the name is too short.
+- Prefer dropping redundancy over truncating words: on a `Wallet` class, the member is `balance`, not `walletBalance` and not `wltBal`.
+- Functions name what they do with a verb: `loadPlayerProfile`, not `lpp` or `doProfile`.
 
 ## Language guidelines
 

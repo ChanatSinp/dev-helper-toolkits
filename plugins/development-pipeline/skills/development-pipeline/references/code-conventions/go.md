@@ -14,13 +14,15 @@
 | Unexported identifiers | `camelCase` — no leading underscore |
 | Interfaces | `IPascalCase` (prefix `I`) — see *Prefixed types* |
 | Local variables, parameters | `camelCase` |
-| Booleans (any scope) | `is`/`has` prefix — `isReady`, `hasPayload`; bare `ok` and `found` stay idiomatic |
+| Booleans (any scope) | `is`/`has`/`can`/`should` prefix — `isReady`, `hasPayload`, `canRetry`, `shouldFlush`; bare `ok` and `found` stay idiomatic |
 | Callbacks | follow the identifier's own casing — `PascalCase` exported, `camelCase` unexported |
 | Event callbacks | `On*` / `on*` prefix — `OnOrderPlaced`, `onRetry` |
 | Handlers | `*Handler` suffix — `SubmitHandler`, `errorHandler` |
 | Method receivers | one or two characters, consistent across every method on the type (`s *Server`) |
 | Sentinel errors | `ErrPascalCase` (`ErrNotFound`) |
 | Error types | `PascalCaseError` (`ValidationError`) |
+| Constructors | `New*` prefix — `NewServer`; plain `New` when the package exports one main type |
+| Test functions | `Test*`, `Benchmark*`, `Example*`, `Fuzz*` prefixes (required by `go test`) |
 | Getters | no `Get` prefix — `Owner()`, not `GetOwner()` |
 | Struct tags / JSON fields | `camelCase` |
 
@@ -43,9 +45,9 @@ Applies inside any identifier, whatever its casing:
 
 The first segment of an unexported (`camelCase`) identifier still starts lowercase: `id`, `uid`, `httpClient`. The rule applies from the second segment onward.
 
-### Short names
+### Name length
 
-Distinct from the acronym rule above: this is about how much of a *word* to keep. Short names are idiomatic in Go and preferred over long ones — but only where the meaning survives. Judge by how far the reader is from the declaration:
+Distinct from the acronym rule above: this is about how much of a *word* to keep. Short names are idiomatic in Go and preferred over long ones — but only where the meaning survives; a longer name is better when the short one would leave the reader guessing. Judge by how far the reader is from the declaration:
 
 - A name whose declaration is one or two lines away can be a single letter: `i` for a loop index, `r` for a reader, `b` for a buffer, `err` for an error, `ctx` for a context.
 - The wider the scope, the more the name has to carry. A package-level variable, an exported field, or a value used dozens of lines below its declaration gets a full word.
