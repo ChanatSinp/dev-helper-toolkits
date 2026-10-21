@@ -142,7 +142,7 @@ const (
 )
 
 type createOrderRequest struct {
-	CustomerUuid string `json:"customerID" binding:"required"`
+	CustomerUuid string `json:"customerUid" binding:"required"`
 	Amount       int64  `json:"amount" binding:"required"`
 }
 

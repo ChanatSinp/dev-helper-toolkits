@@ -14,8 +14,13 @@ for f in agents/*.md; do
 done
 
 comment='One short line written the way a teammate would say it'
-for f in agents/plan-driven-implementer.md; do
+for f in agents/plan-driven-implementer.md skills/development-pipeline/references/code-conventions/go.md skills/development-pipeline/references/code-conventions/csharp.md skills/development-pipeline/references/code-conventions/javascript-typescript.md skills/development-pipeline/references/code-conventions/cocos-creator.md; do
   grep -qF "$comment" "$f" || bad "$f lacks the shared comment-style line"
+done
+
+abs_write='- **Write by absolute path** from the brief'\''s project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.'
+for f in agents/*.md; do
+  grep -qF -- "$abs_write" "$f" || bad "$f lacks the shared absolute-path write rule"
 done
 
 skill=skills/development-pipeline
@@ -57,6 +62,11 @@ Sample.
 |---------|----------|----------------------------|---------------|--------------|
 | WP1 | empty | error | Phase 1 | unit |
 | WP1 | nil (fix round 1) | error | Phase 3 | unit |
+
+## Verification Targets
+- [WP1] Phase 1 — empty input rejected — unit
+- [WP2] Phase 2 — two works — unit
+- [WP1] Phase 3 (fix round 1) — nil rejected — unit
 PLAN
 awk -v r=0 '/^  mkdir -p \.claude\/temp\/wp; w=WP1; r=;/{r=1; next} r && /^  \x27 \.claude\/temp\/plan\.md/{exit} r{sub(/^  /,""); print}' agents/implementation-planner.md > "$tmp/slice.awk"
 [ -s "$tmp/slice.awk" ] || bad "slice-extraction awk not found in implementation-planner.md"
@@ -64,12 +74,15 @@ slice() { (cd "$tmp" && awk -v w="$1" -v r="$2" -f slice.awk .claude/temp/plan.m
 out=$(slice WP1 "")
 echo "$out" | grep -q 'Phase 1: One' || bad "WP1 slice lacks Phase 1"
 echo "$out" | grep -q 'Phase 2' && bad "WP1 slice leaks WP2's phase"
-echo "$out" | grep -q '\[WP2\]' && bad "WP1 slice leaks WP2's Context Pack entry"
+echo "$out" | grep -q '\[WP2\]' && bad "WP1 slice leaks WP2's Context Pack or Verification Target entry"
 echo "$out" | grep -q '\[shared\]' || bad "WP1 slice lacks [shared] entries"
+echo "$out" | grep -q 'empty input rejected' || bad "WP1 slice lacks WP1 Verification Target"
 out=$(slice WP1 1)
 echo "$out" | grep -q 'Phase 1: One' && bad "fix-round slice keeps earlier phases"
 echo "$out" | grep -q 'Phase 3' || bad "fix-round slice lacks the round's phase"
 echo "$out" | grep -q '| empty |' && bad "fix-round slice keeps earlier Edge Case rows"
+echo "$out" | grep -q 'empty input rejected' && bad "fix-round slice keeps earlier Verification Targets"
+echo "$out" | grep -q 'nil rejected' || bad "fix-round slice lacks the round's Verification Target"
 
 [ "$fail" -eq 0 ] && echo "OK"
 exit "$fail"

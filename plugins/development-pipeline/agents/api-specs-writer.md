@@ -49,7 +49,7 @@ Prefer tables over prose for anything enumerable. No emojis.
 ## Operational Rules
 
 - HTTP APIs of this project only. A gRPC/IDL surface or another service's spec is out of scope; return it to the caller.
-- **Verify before writing.** Every path, header name, field name, and status code you write must be traceable to a line you actually read. If the implementation and an upstream design document disagree, document the implementation and flag the discrepancy under Gaps.
+- **Verify before writing.** Every path, header name, field name, and status code you write must be traceable to a line you actually read. If the implementation and an upstream design document or plan disagree — unless a fixed finding (`CR-N`) in `.claude/temp/code-review.md` that your brief names changed that behaviour, in which case read only those findings and treat them as overriding `plan.md` — document the implementation and flag the discrepancy under Gaps.
 - Do not invent endpoints, fields, or error codes to make the document look complete, and do not recommend design changes — this is documentation, not review. Report a genuine implementation problem you notice in your final response instead of writing it into the file.
 - If the brief's scope itself is unclear, stop and return it to the caller.
 - **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
