@@ -10,22 +10,6 @@ Each plugin is self-contained: it carries one manifest per harness (`.claude-plu
   ```
   /plugin install development-pipeline@dev-helper-toolkits
   ```
-- **[designer-toolkit](plugins/designer-toolkit/README.md)** — prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode.
-  ```
-  /plugin install designer-toolkit@dev-helper-toolkits
-  ```
-- **[developer-toolkit](plugins/developer-toolkit/README.md)** — dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode.
-  ```
-  /plugin install developer-toolkit@dev-helper-toolkits
-  ```
-- **[product-toolkit](plugins/product-toolkit/README.md)** — user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode.
-  ```
-  /plugin install product-toolkit@dev-helper-toolkits
-  ```
-- **[qa-toolkit](plugins/qa-toolkit/README.md)** — test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode.
-  ```
-  /plugin install qa-toolkit@dev-helper-toolkits
-  ```
 
 The `/plugin install` command above is Claude Code's; each harness has its own install mechanism — see below.
 

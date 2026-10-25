@@ -8,10 +8,6 @@ Multi-harness plugin marketplace (Claude Code, Cursor, Codex CLI, Antigravity; G
 - `docs/` — `adding-a-plugin.md`, `harnesses/`.
 
 ## Plugins
-- `designer-toolkit` — prototype build, design QA, handoff, interview prompts, compact Thai mode.
-- `developer-toolkit` — dev handoff, design QA reference, HTML prototype protocol, interview prompts, compact Thai mode.
-- `product-toolkit` — user story co-authoring, market/competitor research, interview prompts, compact Thai mode.
-- `qa-toolkit` — test plan/case/UAT generation, design QA, interview prompts, compact Thai mode.
 - `development-pipeline` — staged delivery pipeline: orchestrator skill plus eight sub-agents (`agents/`); behaviour is described in `plugins/development-pipeline/README.md`, and the files themselves are the rules.
   - `skills/development-pipeline/SKILL.md` holds the always-needed rules, including the one model-per-dispatch table and the definition of sensitive areas; `references/` holds the conditional ones (`fan-out.md`, `fix-rounds.md`, `code-review.md`, `api-contracts.md`, `cdk.md` — AWS CDK work, `unit-tests.md` — unit tests written in the implementation pass; both executed by plan-driven-implementer), each read on a trigger line, plus `code-conventions/` and on-request `design-patterns/`.
   - `agents/` are dispatched on Claude Code and read as inline stage definitions (`../../agents/<stage>.md` from the skill dir) elsewhere, so manual installs copy `agents/` too.

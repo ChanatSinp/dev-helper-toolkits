@@ -12,26 +12,6 @@
       "name": "development-pipeline",
       "source": "./plugins/development-pipeline",
       "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation with opt-in unit tests, and opt-in technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work."
-    },
-    {
-      "name": "designer-toolkit",
-      "source": "./plugins/designer-toolkit",
-      "description": "Designer toolkit: prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode."
-    },
-    {
-      "name": "developer-toolkit",
-      "source": "./plugins/developer-toolkit",
-      "description": "Developer toolkit: dev handoff specs/storybook, design QA reference, single-file HTML prototype build protocol, scoping interview prompts, compact Thai mode."
-    },
-    {
-      "name": "product-toolkit",
-      "source": "./plugins/product-toolkit",
-      "description": "Product toolkit: user story co-authoring, market/competitor research, interview/scoping prompts, compact Thai mode."
-    },
-    {
-      "name": "qa-toolkit",
-      "source": "./plugins/qa-toolkit",
-      "description": "QA toolkit: test plan/case/UAT generation, design QA audits, interview/scoping prompts, compact Thai mode."
     }
   ]
 }
