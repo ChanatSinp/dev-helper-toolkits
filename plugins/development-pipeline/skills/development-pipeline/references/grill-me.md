@@ -11,7 +11,7 @@ Whenever the user hands you a requirement and checking it shows you cannot brief
 A question whose answer is already in the project wastes the user's turn and prices options from a guess.
 
 1. **Does a document already decide this?** Check `CLAUDE.md`, `.claude/design-plan.md`, `.claude/docs/`, `.claude/api/`, the request itself. Quote the deciding sentence verbatim; never paraphrase a scope boundary — "out of scope" and "remove it" are different instructions.
-2. **Does the code already model it?** Look for a sibling implementation, an existing endpoint, a schema column, a config key before asking how something should work or what it would cost.
+2. **Does the code already model it?** Look for a sibling implementation, an existing endpoint, a schema column, a config key before asking how something should work or what it would cost. Read the code the new work will reuse or extend — an auth wrapper, a shared handler, a config loader — for defects it would inherit, and raise any as a question.
 3. **Can the claim become a number?** If a question involves size, volume, latency, or cost, measure it (row counts, file sizes, existing limits) and put the number in the question.
 
 "Read, don't ask" is not enough: measure, then ask.
