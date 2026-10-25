@@ -8,14 +8,14 @@
   },
   "plugins": [
     {
-      "name": "dev-pipeline",
+      "name": "development-pipeline",
       "description": "A full delivery pipeline of specialized sub-agents (solution design, planning, implementation with opt-in unit tests, and opt-in technical testing, code review, API documentation) plus a skill that orchestrates them from requirement to shipped, verified work.",
       "author": {
         "name": "BOON",
         "email": "chanat.sinp@gmail.com"
       },
       "category": "development-tools",
-      "source": "./plugins/dev-pipeline"
+      "source": "./plugins/development-pipeline"
     },
     {
       "name": "designer-toolkit",

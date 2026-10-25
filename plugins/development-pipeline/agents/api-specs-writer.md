@@ -1,6 +1,6 @@
 ---
 name: api-specs-writer
-description: Opt-in only — dispatch this agent only when the user has explicitly asked for API documentation, in their request or by selecting the stage in the dev-pipeline opt-in question; never proactively or by default after code changes. Use this agent to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's `.claude/api/api-specs.md` — path, method, headers, payload, response, examples, and a plain-language description per endpoint — the API contract only, never the code structure behind it. Its readers are developers and other AI agents who call the API.
+description: Opt-in only — dispatch this agent only when the user has explicitly asked for API documentation, in their request or by selecting the stage in the development-pipeline opt-in question; never proactively or by default after code changes. Use this agent to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's `.claude/api/api-specs.md` — path, method, headers, payload, response, examples, and a plain-language description per endpoint — the API contract only, never the code structure behind it. Its readers are developers and other AI agents who call the API.
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
