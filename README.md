@@ -6,9 +6,9 @@ Each plugin is self-contained: it carries one manifest per harness (`.claude-plu
 
 ## Plugins in this catalog
 
-- **[development-pipeline](plugins/development-pipeline/README.md)** — a full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work.
+- **[dev-pipeline](plugins/dev-pipeline/README.md)** — a full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work.
   ```
-  /plugin install development-pipeline@dev-helper-toolkits
+  /plugin install dev-pipeline@dev-helper-toolkits
   ```
 - **[designer-toolkit](plugins/designer-toolkit/README.md)** — prototype building, design QA, dev handoff specs, interview/scoping prompts, compact Thai mode.
   ```

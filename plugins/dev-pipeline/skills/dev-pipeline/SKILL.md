@@ -1,6 +1,6 @@
 ---
-name: development-pipeline
-description: Use when turning a requirement into shipped, verified work through a staged delivery pipeline (requirements/design, execution planning, implementation, and opt-in unit tests (written in the implementation pass), technical-test, code-review, and API-documentation stages). On Claude Code, dispatches the development-pipeline sub-agent team one per stage; on any other SKILL.md-reading runtime, runs every stage inline in the same session. Establishes how to size the work, what owns each stage, the order stages run in, and how to verify each deliverable before moving on.
+name: dev-pipeline
+description: Use when turning a requirement into shipped, verified work through a staged delivery pipeline (requirements/design, execution planning, implementation, and opt-in unit tests (written in the implementation pass), technical-test, code-review, and API-documentation stages). On Claude Code, dispatches the dev-pipeline sub-agent team one per stage; on any other SKILL.md-reading runtime, runs every stage inline in the same session. Establishes how to size the work, what owns each stage, the order stages run in, and how to verify each deliverable before moving on.
 ---
 
 # Delivery pipeline

@@ -1,6 +1,6 @@
 ---
 name: api-bruno-writer
-description: Opt-in only — dispatch this agent only when the user has explicitly asked for a Bruno collection, in their request or by selecting the stage in the development-pipeline opt-in question; never proactively or by default after code changes. Use this agent to turn documented APIs into a runnable Bruno collection. It reads the project's `.claude/api/api-specs.md` and writes an OpenCollection 1.0.0 YAML collection under `.claude/api/bruno/<collection-slug>/` — `opencollection.yml`, one `.yml` request file per endpoint, and `environments/*.yml` — ready to open in Bruno.
+description: Opt-in only — dispatch this agent only when the user has explicitly asked for a Bruno collection, in their request or by selecting the stage in the dev-pipeline opt-in question; never proactively or by default after code changes. Use this agent to turn documented APIs into a runnable Bruno collection. It reads the project's `.claude/api/api-specs.md` and writes an OpenCollection 1.0.0 YAML collection under `.claude/api/bruno/<collection-slug>/` — `opencollection.yml`, one `.yml` request file per endpoint, and `environments/*.yml` — ready to open in Bruno.
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---

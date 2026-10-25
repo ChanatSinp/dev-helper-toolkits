@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Mechanical consistency checks for plugins/development-pipeline. Exits non-zero on any failure.
+# Mechanical consistency checks for plugins/dev-pipeline. Exits non-zero on any failure.
 set -u
-cd "$(dirname "$0")/../plugins/development-pipeline" || exit 1
+cd "$(dirname "$0")/../plugins/dev-pipeline" || exit 1
 fail=0
 bad() { echo "FAIL: $*"; fail=1; }
 
@@ -14,7 +14,7 @@ for f in agents/*.md; do
 done
 
 comment='One short line written the way a teammate would say it'
-for f in agents/plan-driven-implementer.md skills/development-pipeline/references/code-conventions/go.md skills/development-pipeline/references/code-conventions/csharp.md skills/development-pipeline/references/code-conventions/javascript-typescript.md skills/development-pipeline/references/code-conventions/cocos-creator.md; do
+for f in agents/plan-driven-implementer.md skills/dev-pipeline/references/code-conventions/go.md skills/dev-pipeline/references/code-conventions/csharp.md skills/dev-pipeline/references/code-conventions/javascript-typescript.md skills/dev-pipeline/references/code-conventions/cocos-creator.md; do
   grep -qF "$comment" "$f" || bad "$f lacks the shared comment-style line"
 done
 
@@ -23,7 +23,7 @@ for f in agents/*.md; do
   grep -qF -- "$abs_write" "$f" || bad "$f lacks the shared absolute-path write rule"
 done
 
-skill=skills/development-pipeline
+skill=skills/dev-pipeline
 for r in $(grep -o 'references/[a-z-]*\.md' "$skill/SKILL.md" | sort -u); do
   [ -f "$skill/$r" ] || bad "SKILL.md points at missing $r"
 done

@@ -1,4 +1,4 @@
-# development-pipeline
+# dev-pipeline
 
 A full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work — installable on Claude Code, Cursor, Codex CLI, and Antigravity, and by manual copy on Gemini CLI, from one shared skill.
 
@@ -7,8 +7,8 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 - **`.claude-plugin/plugin.json`** — Claude Code manifest.
 - **`.codex-plugin/plugin.json`**, **`.cursor-plugin/plugin.json`** — manifests for Codex CLI and Cursor, each pointing at the same `skills/` directory as Claude Code.
 - **`.antigravity-plugin/plugin.json`** — minimal manifest for Antigravity, copied out (undotted) alongside `skills/` and `agents/` on install rather than referenced in place.
-- **`skills/development-pipeline/`** — one harness-agnostic orchestration skill: sizing rules (including a SemVer `vX.Y.Z` project version bump only when the user asks for one), stage sequencing, and delivery rules, with the fan-out, fix-round, code-review, and API-contract rules in `references/` files it reads only when that situation arises (code conventions and the on-request design-pattern examples, such as `design-patterns/go-gin-hexagonal.md`, live there too). On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time, reading the stage's definition from `agents/` first.
-- **`agents/`** — eight stage definitions (the technical-test and code-review agents run only when the user asks for them, never by default), each owning one stage: dispatched as sub-agents by `skills/development-pipeline/` where sub-agent dispatch is available (Claude Code), read by the skill as that stage's instructions (`../../agents/<stage>.md` from the skill directory) on every other runtime:
+- **`skills/dev-pipeline/`** — one harness-agnostic orchestration skill: sizing rules (including a SemVer `vX.Y.Z` project version bump only when the user asks for one), stage sequencing, and delivery rules, with the fan-out, fix-round, code-review, and API-contract rules in `references/` files it reads only when that situation arises (code conventions and the on-request design-pattern examples, such as `design-patterns/go-gin-hexagonal.md`, live there too). On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time, reading the stage's definition from `agents/` first.
+- **`agents/`** — eight stage definitions (the technical-test and code-review agents run only when the user asks for them, never by default), each owning one stage: dispatched as sub-agents by `skills/dev-pipeline/` where sub-agent dispatch is available (Claude Code), read by the skill as that stage's instructions (`../../agents/<stage>.md` from the skill directory) on every other runtime:
   - `solution-architect` — functional + technical design (`.claude/design-plan.md`, with a feature index and shared invariants at the top so later stages read only their sections)
   - `implementation-planner` — execution plan (`.claude/temp/plan.md`); for a bug with an unknown cause it reproduces and diagnoses first, recording the root cause in the plan
   - `plan-driven-implementer` — faithful plan execution (product code only), one dispatch for the whole plan, or — only when the user asks — fanned out one dispatch per work package (each reading only its `.claude/temp/wp/` slice, which carries the shared Context Pack entries plus its own package's; `routine` packages on Sonnet) plus a Sonnet consolidation pass that writes the full lint/build/test output to `.claude/temp/verify.log`; small fix rounds — selected code-review findings, or a failing `verify.log` where product code is at fault, or failing technical-test cases — are dispatched directly, larger ones through a "(fix round N)" phase added to the plan
@@ -26,22 +26,22 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
 
 ```
 /plugin marketplace add https://github.com/ChanatSinp/dev-helper-toolkits.git
-/plugin install development-pipeline@dev-helper-toolkits
+/plugin install dev-pipeline@dev-helper-toolkits
 ```
 
-Or reference `plugins/development-pipeline/` directly as a local plugin directory in your Claude Code settings.
+Or reference `plugins/dev-pipeline/` directly as a local plugin directory in your Claude Code settings.
 
-**Cursor** — add this repo as a team marketplace (see the [root README](../../README.md#cursor)), then install `development-pipeline` from the Plugins panel. Runs every stage inline in the same session — no sub-agent dispatch.
+**Cursor** — add this repo as a team marketplace (see the [root README](../../README.md#cursor)), then install `dev-pipeline` from the Plugins panel. Runs every stage inline in the same session — no sub-agent dispatch.
 
 **Codex CLI** — `codex plugin marketplace add <this-repo>`, then `/plugins` to install. Runs every stage inline, same as Cursor.
 
 **Antigravity** — has a real plugin system but no marketplace; install by copying the plugin out flattened (see [Antigravity](../../docs/harnesses/antigravity.md)). Runs every stage inline, same as Cursor and Codex CLI — `agents/` is copied too, as the stage definitions the skill reads, not for dispatch:
 
 ```
-mkdir -p <your-project>/.agents/plugins/development-pipeline
-cp -r plugins/development-pipeline/skills <your-project>/.agents/plugins/development-pipeline/skills
-cp -r plugins/development-pipeline/agents <your-project>/.agents/plugins/development-pipeline/agents
-cp plugins/development-pipeline/.antigravity-plugin/plugin.json <your-project>/.agents/plugins/development-pipeline/plugin.json
+mkdir -p <your-project>/.agents/plugins/dev-pipeline
+cp -r plugins/dev-pipeline/skills <your-project>/.agents/plugins/dev-pipeline/skills
+cp -r plugins/dev-pipeline/agents <your-project>/.agents/plugins/dev-pipeline/agents
+cp plugins/dev-pipeline/.antigravity-plugin/plugin.json <your-project>/.agents/plugins/dev-pipeline/plugin.json
 ```
 
-**Any other `SKILL.md`-reading runtime** (Gemini CLI, or standalone Claude Code without the marketplace) — copy `skills/development-pipeline/` into that project's own skills convention directory, and the `agents/*.md` files into an `agents/` directory beside that skills directory, where the skill looks for them (`../../agents/<stage>.md` from the skill directory): `.agents/agents/` for [Gemini CLI](../../docs/harnesses/gemini-cli.md), `.claude/agents/` for [Claude Code](../../docs/harnesses/claude-code.md) — which loads them from there as project sub-agents, so dispatch works.
+**Any other `SKILL.md`-reading runtime** (Gemini CLI, or standalone Claude Code without the marketplace) — copy `skills/dev-pipeline/` into that project's own skills convention directory, and the `agents/*.md` files into an `agents/` directory beside that skills directory, where the skill looks for them (`../../agents/<stage>.md` from the skill directory): `.agents/agents/` for [Gemini CLI](../../docs/harnesses/gemini-cli.md), `.claude/agents/` for [Claude Code](../../docs/harnesses/claude-code.md) — which loads them from there as project sub-agents, so dispatch works.

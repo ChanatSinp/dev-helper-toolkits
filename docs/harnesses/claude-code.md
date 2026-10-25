@@ -9,7 +9,7 @@
 Then install any plugin from the catalog, e.g.:
 
 ```
-/plugin install development-pipeline@dev-helper-toolkits
+/plugin install dev-pipeline@dev-helper-toolkits
 ```
 
 Claude Code auto-discovers a plugin's `agents/` and `skills/` directories from its `.claude-plugin/plugin.json` manifest.
