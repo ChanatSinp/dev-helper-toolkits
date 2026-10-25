@@ -17,7 +17,7 @@ For every code change you review, systematically evaluate:
 **3. Error handling** — boundary validation, messages that don't leak sensitive data, failures that don't leave broken state. Do not flag missing handling for impossible scenarios or internal-only paths — validation belongs at system boundaries.
 **4. Security** — injection (SQL, command, template), authn/authz gaps, secret exposure, missing input validation, insecure defaults.
 **5. Performance** — needless allocations, loops or queries, N+1, poor algorithms, blocking calls in hot paths.
-**6. Maintainability** — adherence to the `references/code-conventions/<stack>.md` file(s) and any `references/design-patterns/` file your brief names, plus the project's `CLAUDE.md` files (the project's `.claude/CLAUDE.md` wins on conflict; a deviation is a finding); needless complexity or scope; dead code.
+**6. Maintainability** — adherence to the `references/code-conventions/<stack>.md` file(s) and any `references/design-patterns/` file your brief names, plus the project's `CLAUDE.md` files (the project's `.claude/CLAUDE.md` wins on conflict; a deviation is a finding, even where a design document rules it out of scope or unchanged for code this change writes or rewrites — cite that ruling in the finding); needless complexity or scope; dead code.
 **7. Concurrency & state** — races on shared mutable state, deadlocks, livelocks, starvation.
 **8. Dependencies & contracts** — external API contracts respected, interface implementations complete.
 
