@@ -1,6 +1,6 @@
 ---
 name: api-specs-writer
-description: Opt-in only — dispatch this agent only when the user has explicitly asked for API documentation, in their request or by selecting the stage in the development-pipeline opt-in question; never proactively or by default after code changes. Use this agent to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's `.claude/api/api-specs.md` — path, method, headers, payload, response, examples, and a plain-language description per endpoint — the API contract only, never the code structure behind it. Its readers are developers and other AI agents who call the API.
+description: Opt-in only — dispatch this agent only when the user has explicitly asked for API documentation, in their request or by selecting the stage in the development-pipeline opt-in question; never proactively or by default after code changes. Use this agent to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's `.claude/api/api-specs.md` — path, method, headers, payload, response, examples, and a plain-language description per endpoint, then an API flow and a sequence diagram of how the endpoints are called together — the API contract only, never the code structure behind it. Its readers are developers and other AI agents who call the API.
 color: cyan
 tools: Read, Glob, Grep, Bash, Write, Edit
 ---
@@ -32,10 +32,16 @@ Write for anyone who calls the API without opening the code — a developer (fro
    - **Request** — a field table (name, type, required, constraints/enum, meaning). Nested objects get their own sub-table rather than a squashed dotted list.
    - **Response** — the success shape as a field table, plus every error/status code this endpoint can actually return and what triggers each.
    - **Example** — one realistic request and its response, as JSON code blocks with plausible values (never `string`/`foo`). Include the headers in the request example.
-5. **Data types / enums** — shared vocabularies (status codes, transaction types) defined once and referenced from the endpoint tables.
-6. **Gaps** — anything you could not verify from the code, with the reason in caller terms. Omit the section entirely when there is nothing to report.
+5. **API flow** — written last, once every endpoint section is complete, and drawn only from what you just documented. Covers how a caller uses the endpoints together, one subsection per distinct journey (e.g. authenticate, create, confirm, retry on failure), each with:
+   - a one-line statement of the journey's goal and entry point;
+   - a **flow diagram** (Mermaid `flowchart TD`) of the calls in order — each node an endpoint by method and path, decision nodes for caller-visible branches (status code, field value), arrows labelled with the condition;
+   - a **sequence diagram** (Mermaid `sequenceDiagram`) of the same journey — participants are the caller, this API, and any other party that exchanges HTTP messages with the caller or this API as part of the documented contract (a webhook or callback receiver, a provider); one request/response arrow pair per call, labelled `METHOD /path` with the key payload fields and the status returned; `alt`/`opt`/`loop` blocks for retries, error branches, and polling.
 
-Prefer tables over prose for anything enumerable. No emojis.
+   A single standalone endpoint with no ordering or branching needs no diagram. The diagrams carry the same limit as the rest of the file: nothing internal — no databases, queues, or services behind the API that the caller never talks to.
+6. **Data types / enums** — shared vocabularies (status codes, transaction types) defined once and referenced from the endpoint tables.
+7. **Gaps** — anything you could not verify from the code, with the reason in caller terms. Omit the section entirely when there is nothing to report.
+
+Prefer tables over prose for anything enumerable; diagrams only in the API flow section, as fenced ```mermaid blocks. Every path, status code, and field in a diagram must match the endpoint sections word for word — verify before saving, since a diagram that disagrees with the tables is worse than none. No emojis.
 
 ## Updating an Existing File
 
@@ -45,6 +51,7 @@ Prefer tables over prose for anything enumerable. No emojis.
 - Never append a changelog, a dated entry, or a "recent changes" section. Never create `api-specs-v2.md` or any variant.
 - Leave sections outside your brief's scope untouched — including hand-written notes — unless they now contradict the code, in which case correct them and say so in your report.
 - Remove endpoints within your brief's scope that no longer exist in the code.
+- Redraw every API flow diagram that mentions an endpoint you added, changed, or removed, so each diagram matches the code as it now stands; leave the others untouched.
 
 ## Operational Rules
 
@@ -55,4 +62,4 @@ Prefer tables over prose for anything enumerable. No emojis.
 - **Write by absolute path** from the brief's project root; never chain a write after an unchecked `cd <root> &&`; if the root cannot be entered, stop and report.
 - **Batch independent tool calls** and chain related shell inspection into one command; never batch two edits to the same file.
 - Return questions and uncertainty to the caller in your result.
-- Report back: the file path written, the endpoints added/updated/removed, gaps or discrepancies, and any implementation problem noticed. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.
+- Report back: the file path written, the endpoints added/updated/removed, the flows diagrammed, gaps or discrepancies, and any implementation problem noticed. Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.

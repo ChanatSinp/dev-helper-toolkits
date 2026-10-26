@@ -17,7 +17,7 @@ A full delivery pipeline of specialized sub-agents plus a skill that orchestrate
   - `technical-tester` — test plan + execution (opt-in): one `.claude/testing-plan.md` indexed per feature, results in `.claude/temp/test-results.md`
   - `code-reviewer` — correctness/security/edge-case review (opt-in), run with its fix/re-review loop before the other post-implementation stages
   - `document-reader` — distills source documents into `.claude/docs/` summaries (opt-in)
-  - `api-specs-writer` — documents this project's own HTTP API contract for developers and AI agents, never its code structure (opt-in, on Sonnet)
+  - `api-specs-writer` — documents this project's own HTTP API contract for developers and AI agents, never its code structure, ending with an API flow and sequence diagram of how the endpoints are called together (opt-in, on Sonnet)
   - `api-bruno-writer` — generates a Bruno collection from the API doc (opt-in, on Sonnet)
 
 ## Install
