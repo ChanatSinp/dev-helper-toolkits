@@ -1,0 +1,6 @@
+{
+  "name": "api-bruno-writer",
+  "description": "Opt-in only — dispatch this agent only when the user has explicitly asked for a Bruno collection; never proactively or by default after code changes. Use it to turn documented APIs into a runnable Bruno collection. It reads the project's .claude/api/api-specs.md and writes an OpenCollection 1.0.0 YAML collection under .claude/api/bruno/<collection-slug>/ — opencollection.yml, one .yml request file per endpoint, and environments/*.yml — ready to open in Bruno.",
+  "prompt": "file://../../plugins/development-pipeline/agents/api-bruno-writer.md",
+  "tools": ["read", "write", "shell"]
+}

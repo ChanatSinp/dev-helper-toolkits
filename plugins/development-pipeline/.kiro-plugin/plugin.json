@@ -1,0 +1,21 @@
+{
+  "name": "development-pipeline",
+  "version": "1.4.6",
+  "description": "A staged delivery pipeline that turns a requirement into shipped, verified work: requirements/design, execution planning, implementation (with opt-in unit tests), and opt-in technical-test, code-review, and API-documentation stages. Under Kiro each stage is a custom sub-agent dispatched from a steering-file orchestrator.",
+  "author": {
+    "name": "BOON",
+    "email": "chanat.sinp@gmail.com"
+  },
+  "homepage": "https://github.com/ChanatSinp/dev-helper-toolkits",
+  "repository": "https://github.com/ChanatSinp/dev-helper-toolkits",
+  "keywords": [
+    "delivery-pipeline",
+    "planning",
+    "implementation",
+    "code-review",
+    "testing",
+    "api-documentation"
+  ],
+  "agents": "./agents/",
+  "skills": "./skills/"
+}

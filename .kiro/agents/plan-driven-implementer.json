@@ -1,0 +1,6 @@
+{
+  "name": "plan-driven-implementer",
+  "description": "Use this agent when an implementation plan exists in the project's .claude/temp/plan.md and needs to be executed faithfully. It writes product/application code (and, when opted in, the unit tests for its scope in the same pass), runs the project's lint/build/test, and reports a changed-file list. Verification against the plan is the caller's responsibility, not this agent's.",
+  "prompt": "file://../../plugins/development-pipeline/agents/plan-driven-implementer.md",
+  "tools": ["read", "write", "shell"]
+}

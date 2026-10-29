@@ -5,8 +5,27 @@ cd "$(dirname "$0")/../plugins/development-pipeline" || exit 1
 fail=0
 bad() { echo "FAIL: $*"; fail=1; }
 
-versions=$(grep -h '"version"' .claude-plugin/plugin.json .codex-plugin/plugin.json .cursor-plugin/plugin.json .antigravity-plugin/plugin.json | sort -u | wc -l)
-[ "$versions" -eq 1 ] || bad "plugin.json versions differ across the four manifests"
+versions=$(grep -h '"version"' .claude-plugin/plugin.json .codex-plugin/plugin.json .cursor-plugin/plugin.json .antigravity-plugin/plugin.json .kiro-plugin/plugin.json | sort -u | wc -l)
+[ "$versions" -eq 1 ] || bad "plugin.json versions differ across the five manifests"
+
+# Kiro: one custom sub-agent JSON per agents/*.md, each pointing at an existing prompt body.
+for a in agents/*.md; do
+  name=$(basename "$a" .md)
+  j="../../.kiro/agents/$name.json"
+  [ -f "$j" ] || bad "missing Kiro agent for $name ($j)"
+done
+for j in ../../.kiro/agents/*.json; do
+  python3 - "$j" <<'PY' || bad "Kiro agent $j has invalid JSON or a missing prompt body"
+import json, os, sys
+j = sys.argv[1]
+d = json.load(open(j))
+p = d["prompt"]
+assert p.startswith("file://"), "prompt is not a file:// URI"
+rel = p[len("file://"):]
+target = os.path.normpath(os.path.join(os.path.dirname(j), rel))
+assert os.path.isfile(target), f"missing prompt body: {target}"
+PY
+done
 
 plain='Write it in plain words for someone who did not follow the run: result first, short sentences, everyday terms. Name a thing by what it is; use an ID (`CR-2`, `WP1`, `AC-10`) only when the reader needs it to find or route the item, and say what it means next to it.'
 for f in agents/*.md; do

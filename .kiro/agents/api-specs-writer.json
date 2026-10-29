@@ -1,0 +1,6 @@
+{
+  "name": "api-specs-writer",
+  "description": "Opt-in only — dispatch this agent only when the user has explicitly asked for API documentation; never proactively or by default after code changes. Use it to document implemented HTTP APIs. It reads the actual implementation (handlers, routes, request/response structs, middleware) and writes or updates the project's .claude/api/api-specs.md — path, method, headers, payload, response, examples, and a plain-language description per endpoint, then an API flow and sequence diagram. The API contract only, never the code structure behind it.",
+  "prompt": "file://../../plugins/development-pipeline/agents/api-specs-writer.md",
+  "tools": ["read", "write", "shell"]
+}

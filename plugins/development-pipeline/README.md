@@ -1,12 +1,13 @@
 # development-pipeline
 
-A full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work — installable on Claude Code, Cursor, Codex CLI, and Antigravity, and by manual copy on Gemini CLI, from one shared skill.
+A full delivery pipeline of specialized sub-agents plus a skill that orchestrates them from requirement to shipped, verified work — installable on Claude Code, Cursor, Codex CLI, Antigravity, and Kiro, and by manual copy on Gemini CLI, from one shared skill.
 
 ## Contents
 
 - **`.claude-plugin/plugin.json`** — Claude Code manifest.
 - **`.codex-plugin/plugin.json`**, **`.cursor-plugin/plugin.json`** — manifests for Codex CLI and Cursor, each pointing at the same `skills/` directory as Claude Code.
 - **`.antigravity-plugin/plugin.json`** — minimal manifest for Antigravity, copied out (undotted) alongside `skills/` and `agents/` on install rather than referenced in place.
+- **`.kiro-plugin/plugin.json`** — Kiro manifest, pointing at the same `agents/` and `skills/` directories. Kiro runs the pipeline with real sub-agent dispatch (like Claude Code): `scripts/install-kiro.sh` turns the skill into an auto-included steering-file orchestrator and each agent into a `.kiro/agents/*.json` custom sub-agent.
 - **`skills/development-pipeline/`** — one harness-agnostic orchestration skill: sizing rules (including a SemVer `vX.Y.Z` project version bump only when the user asks for one), stage sequencing, and delivery rules, with the grill-me, fan-out, fix-round, code-review, version-bump, and API-contract rules in `references/` files it reads only when that situation arises (code conventions and the on-request design-pattern examples, such as `design-patterns/go-gin-hexagonal.md`, live there too). On Claude Code, dispatch the named sub-agent per stage; on any other runtime, run every stage yourself in the same session, one at a time, reading the stage's definition from `agents/` first.
 - **`agents/`** — eight stage definitions (the technical-test and code-review agents run only when the user asks for them, never by default), each owning one stage: dispatched as sub-agents by `skills/development-pipeline/` where sub-agent dispatch is available (Claude Code), read by the skill as that stage's instructions (`../../agents/<stage>.md` from the skill directory) on every other runtime:
   - `solution-architect` — functional + technical design (`.claude/design-plan.md`, with a feature index and shared invariants at the top so later stages read only their sections)
@@ -43,5 +44,13 @@ cp -r plugins/development-pipeline/skills <your-project>/.agents/plugins/develop
 cp -r plugins/development-pipeline/agents <your-project>/.agents/plugins/development-pipeline/agents
 cp plugins/development-pipeline/.antigravity-plugin/plugin.json <your-project>/.agents/plugins/development-pipeline/plugin.json
 ```
+
+**Kiro** — has custom sub-agents and steering but no repo-importing marketplace; install with the flatten script (see [Kiro](../../docs/harnesses/kiro.md)). Dispatches each stage as a sub-agent, like Claude Code:
+
+```
+scripts/install-kiro.sh <your-project>
+```
+
+This writes `.kiro/steering/development-pipeline.md` (the `inclusion: auto` orchestrator) plus its `SKILL.md`, `agents/`, and `references/`, and one `.kiro/agents/<stage>.json` custom sub-agent per stage.
 
 **Any other `SKILL.md`-reading runtime** (Gemini CLI, or standalone Claude Code without the marketplace) — copy `skills/development-pipeline/` into that project's own skills convention directory, and the `agents/*.md` files into an `agents/` directory beside that skills directory, where the skill looks for them (`../../agents/<stage>.md` from the skill directory): `.agents/agents/` for [Gemini CLI](../../docs/harnesses/gemini-cli.md), `.claude/agents/` for [Claude Code](../../docs/harnesses/claude-code.md) — which loads them from there as project sub-agents, so dispatch works.
